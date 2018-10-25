@@ -13,6 +13,6 @@ end
 
 gerrit_repositories = gerritbot_comments.map do |element|
   element['comments'][0]['content']['raw'].split('[')[1].split('@')[0]
-end.uniq
+end.uniq.compact
 
 puts "#{phabricator_task}: #{gerrit_repositories}"
