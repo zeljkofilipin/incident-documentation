@@ -1,10 +1,18 @@
-require 'selenium-webdriver'
+api_token = ARGV[0]
+phabricator_task = ARGV[1]
+task_json = `curl https://phabricator.wikimedia.org/api/transaction.search \
+-d api.token=#{api_token} \
+-d objectIdentifier=#{phabricator_task}`
 
-driver = Selenium::WebDriver.for :firefox
-driver.navigate.to 'https://phabricator.wikimedia.org/T188381'
+require 'json'
+task_comments = JSON.parse(task_json)
+gerritbot_comments = task_comments['result']['data'].select do |element|
+  gerritbot = 'PHID-USER-idceizaw6elwiwm5xshb'
+  element['authorPHID'] == gerritbot && !element['comments'].empty?
+end
 
-elements = driver.find_elements(class: 'remarkup-link')
+gerrit_repositories = gerritbot_comments.map do |element|
+  element['comments'][0]['content']['raw'].split('[')[1].split('@')[0]
+end.uniq
 
-puts elements
-
-driver.quit
+puts "#{phabricator_task}: #{gerrit_repositories}"
