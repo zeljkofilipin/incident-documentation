@@ -9,10 +9,11 @@ Tools for gathering data from [Wikimedia incident documentation](https://wikitec
 
 Generate a token at https://phabricator.wikimedia.org/settings/user/USERNAME/page/apitokens/.
 
-    bundle exec ruby phabricator_gerrit.rb API_TOKEN PHABRICATOR_TASK
+    bundle exec ruby phabricator_gerrit.rb API_TOKEN FILE_WITH_LIST_OF_PHABRICATOR_TASKS
 
 ## Example
 
-    $ bundle exec ruby phabricator_gerrit.rb API_TOKEN T185011
+    $ bundle exec ruby phabricator_gerrit.rb API_TOKEN 2018.txt
     ...
-    T185011: ["integration/config", "mediawiki/core", "integration/jenkins"]
+    [{"T185011"=>["integration/config", "mediawiki/core", "integration/jenkins"]},
+     {"T184715"=>["operations/debs/pybal"]}]
