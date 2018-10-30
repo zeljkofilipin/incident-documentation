@@ -9,4 +9,4 @@ response = client.action :query,
                          aplimit: '100'
 
 incidents = response.data['allpages'].map { |element| element['title'] }
-IO.write("incidents_#{year}.txt", incidents.join("\n"))
+IO.write("incidents_list_#{year}.txt", incidents.join("\n"))
