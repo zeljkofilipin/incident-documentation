@@ -28,3 +28,17 @@ incidents.each do |incident|
     gerrit_from_wikitext(incidents_actionables[incident])
 end
 pp incidents_gerrit
+
+def phabricator_from_wikitext(wikitext)
+  if wikitext.respond_to?(:scan)
+    wikitext.scan(/\[\[phab:(T\d{5,6})\]\]/).flatten.uniq
+  else
+    []
+  end
+end
+incidents_phabricator = {}
+incidents.each do |incident|
+  incidents_phabricator[incident] =
+    phabricator_from_wikitext(incidents_actionables[incident])
+end
+pp incidents_phabricator
