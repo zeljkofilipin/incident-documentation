@@ -1,6 +1,6 @@
 require 'mediawiki_api'
 
-year = 'test'
+year = '2018'
 client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
 incidents = File.readlines("incidents_#{year}.txt").map(&:strip)
 
@@ -16,7 +16,11 @@ incidents.each do |incident|
 end
 
 def gerrit_from_wikitext(wikitext)
-  wikitext.scan(/\[\[gerrit:(\d{6})\]\]/).flatten.uniq
+  if wikitext.respond_to?(:scan)
+    wikitext.scan(/\[\[gerrit:(\d{6})\]\]/).flatten.uniq
+  else
+    []
+  end
 end
 incidents_gerrit = {}
 incidents.each do |incident|
