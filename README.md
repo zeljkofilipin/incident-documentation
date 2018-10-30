@@ -13,7 +13,7 @@ Generate a token at https://phabricator.wikimedia.org/settings/user/USERNAME/pag
 
 ## Example
 
-    $ bundle exec ruby phabricator_gerrit.rb API_TOKEN 2018.txt
+    $ bundle exec ruby phabricator_gerrit.rb API_TOKEN phabricator_gerrit_2018.txt
     ...
     [{"T185011"=>["integration/config", "mediawiki/core", "integration/jenkins"]},
      {"T184715"=>["operations/debs/pybal"]}]
