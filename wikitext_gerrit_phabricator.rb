@@ -2,7 +2,7 @@ require 'mediawiki_api'
 
 year = '2018'
 client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
-incidents = File.readlines("incidents_#{year}.txt").map(&:strip)
+incidents = File.readlines("incidents_list_#{year}.txt").map(&:strip)
 
 incidents_wikitext = {}
 incidents.each do |incident|
