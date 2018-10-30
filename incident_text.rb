@@ -14,4 +14,13 @@ incidents.each do |incident|
   incidents_actionables[incident] =
     incidents_wikitext[incident].split('Actionables')[1]
 end
-pp incidents_actionables
+
+def gerrit_from_wikitext(wikitext)
+  wikitext.scan(/\[\[gerrit:(\d{6})\]\]/).flatten.uniq
+end
+incidents_gerrit = {}
+incidents.each do |incident|
+  incidents_gerrit[incident] =
+    gerrit_from_wikitext(incidents_actionables[incident])
+end
+pp incidents_gerrit
