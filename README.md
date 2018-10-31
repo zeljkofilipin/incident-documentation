@@ -14,6 +14,5 @@ Generate a token at `https://phabricator.wikimedia.org/settings/user/USERNAME/pa
 ## Example
 
     $ bundle exec ruby incident_documentation.rb API_TOKEN 20180226
-    ...
-    [{"T185011"=>["integration/config", "mediawiki/core", "integration/jenkins"]},
-     {"T184715"=>["operations/debs/pybal"]}]
+
+    ["Incident documentation/20180226-WikibaseQualityConstraints"]
