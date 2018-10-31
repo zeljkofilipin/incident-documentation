@@ -16,3 +16,9 @@ Generate a token at `https://phabricator.wikimedia.org/settings/user/USERNAME/pa
     $ bundle exec ruby incident_documentation.rb API_TOKEN 20180226
 
     ["Incident documentation/20180226-WikibaseQualityConstraints"]
+
+    {"Incident documentation/20180226-WikibaseQualityConstraints"=>
+      "== Summary ==\n" +
+    ...
+    "[[Category:Incident documentation]]"}
+

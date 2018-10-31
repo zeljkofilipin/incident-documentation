@@ -1,4 +1,8 @@
-require_relative 'lib/incidents_list.rb'
-
+require_relative 'lib/incidents_list'
 incidents_subset = ARGV[1]
-pp incidents(incidents_subset)
+incidents = incidents(incidents_subset)
+pp incidents
+
+require_relative 'lib/wikitext'
+wikitext = wikitext(incidents)
+pp wikitext
