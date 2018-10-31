@@ -27,7 +27,6 @@ incidents.each do |incident|
   incidents_gerrit[incident] =
     gerrit_from_wikitext(incidents_actionables[incident])
 end
-pp incidents_gerrit
 
 def phabricator_from_wikitext(wikitext)
   if wikitext.respond_to?(:scan)
@@ -59,3 +58,11 @@ incidents.each do |incident|
     repository_from_gerrit(incidents_gerrit[incident])
 end
 pp incidents_gerrit_repository
+
+require_relative 'phabricator_gerrit'
+incidents_phabricator_repository = {}
+incidents.each do |incident|
+  incidents_phabricator_repository[incident] =
+    tasks_repos(incidents_phabricator[incident])
+end
+pp incidents_phabricator_repository
