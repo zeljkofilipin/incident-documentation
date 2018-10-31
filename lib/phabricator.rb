@@ -13,11 +13,6 @@ def gerritbot_comments(task_comments)
   end
 end
 
-def output(tasks_repos)
-  require 'pp'
-  pp tasks_repos
-end
-
 def task_comments(task_json)
   require 'json'
   JSON.parse(task_json)
@@ -41,11 +36,11 @@ def tasks_repos(tasks)
   end
 end
 
-if $PROGRAM_NAME == __FILE__
-  def tasks
-    tasks_file = ARGV[1]
-    File.readlines(tasks_file).map(&:strip)
+def repos_tasks(incidents, incidents_phabricator)
+  incidents_phabricator_repository = {}
+  incidents.each do |incident|
+    incidents_phabricator_repository[incident] =
+      tasks_repos(incidents_phabricator[incident])
   end
-
-  output(tasks_repos(tasks))
+  incidents_phabricator_repository
 end

@@ -13,11 +13,20 @@ Generate a token at `https://phabricator.wikimedia.org/settings/user/USERNAME/pa
 
 ## Example
 
-    $ bundle exec ruby incident_documentation.rb API_TOKEN 20180524
-    ["Incident documentation/20180524-wikidata"]
-    {"Incident documentation/20180524-wikidata"=>["435113", "435080", "435079"]}
-    {"Incident documentation/20180524-wikidata"=>["T177453", "T195792"]}
-    {"Incident documentation/20180524-wikidata"=>
-      ["operations/puppet",
-      "mediawiki/extensions/PropertySuggester",
-      "mediawiki/extensions/Wikibase"]}
+     $ bundle exec ruby incident_documentation.rb API_TOKEN 20180312
+
+     # Incidents that start with 20180312
+     ["Incident documentation/20180312-Cache-text"]
+
+     # Gerrit patches in Actionables section
+     {"Incident documentation/20180312-Cache-text"=>["419090"]}
+
+     # Gerrit repositories from Gerrit patches
+     {"Incident documentation/20180312-Cache-text"=>["operations/puppet"]}
+
+     # Phabricator tickets in Actionables section
+     {"Incident documentation/20180312-Cache-text"=>["T181315", "T96853"]}
+
+     # Gerrit repositories from Phabricator ticket
+     {"Incident documentation/20180312-Cache-text"=>
+       [{"T181315"=>["operations/puppet", "mediawiki/vagrant"]}, {"T96853"=>[]}]}
