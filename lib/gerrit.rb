@@ -9,8 +9,12 @@ def repository_from_gerrit(patches)
     repository
   end.uniq
 end
-incidents_gerrit_repository = {}
-incidents.each do |incident|
-  incidents_gerrit_repository[incident] =
-    repository_from_gerrit(incidents_gerrit[incident])
+
+def repos_patches(incidents, incidents_gerrit)
+  incidents_gerrit_repository = {}
+  incidents.each do |incident|
+    incidents_gerrit_repository[incident] =
+      repository_from_gerrit(incidents_gerrit[incident])
+  end
+  incidents_gerrit_repository
 end
