@@ -6,3 +6,6 @@ pp incidents
 require_relative 'lib/wikitext'
 wikitext = wikitext(incidents)
 pp wikitext
+
+actionables = actionables(incidents, wikitext)
+pp actionables

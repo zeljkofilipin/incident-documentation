@@ -9,13 +9,16 @@ def wikitext(incidents)
   incidents_wikitext
 end
 
-if $PROGRAM_NAME == __FILE__
+def actionables(incidents, incidents_wikitext)
   incidents_actionables = {}
   incidents.each do |incident|
     incidents_actionables[incident] =
       incidents_wikitext[incident].split('Actionables')[1]
   end
+  incidents_actionables
+end
 
+if $PROGRAM_NAME == __FILE__
   def gerrit_from_wikitext(wikitext)
     if wikitext.respond_to?(:scan)
       wikitext.scan(/\[\[gerrit:(\d{6})\]\]/).flatten.uniq

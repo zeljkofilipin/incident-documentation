@@ -22,3 +22,8 @@ Generate a token at `https://phabricator.wikimedia.org/settings/user/USERNAME/pa
     ...
     "[[Category:Incident documentation]]"}
 
+    {"Incident documentation/20180226-WikibaseQualityConstraints"=>
+    " ==\n" +
+    ...
+    "[[Category:Incident documentation]]"}
+
