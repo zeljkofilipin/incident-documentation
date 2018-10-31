@@ -1,4 +1,4 @@
-require_relative 'lib/incidents_list'
+require_relative 'lib/wikitech'
 incidents_subset = ARGV[1]
 incidents = incidents(incidents_subset)
 pp incidents
