@@ -27,6 +27,10 @@ Generate a token at `https://phabricator.wikimedia.org/settings/user/USERNAME/pa
      # Phabricator tasks in Actionables section
      {"Incident documentation/20180312-Cache-text"=>["T181315", "T96853"]}
 
-     # Gerrit repositories from Phabricator tasks
+     # Gerrit repositories from Phabricator tasks verbose
      {"Incident documentation/20180312-Cache-text"=>
        [{"T181315"=>["operations/puppet", "mediawiki/vagrant"]}, {"T96853"=>[]}]}
+
+    # Gerrit repositories from Phabricator tasks summary
+    # {"Incident documentation/20180312-Cache-text"=>
+    #   ["operations/puppet", "mediawiki/vagrant"]}
