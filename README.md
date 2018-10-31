@@ -16,3 +16,4 @@ Generate a token at `https://phabricator.wikimedia.org/settings/user/USERNAME/pa
     $ bundle exec ruby incident_documentation.rb API_TOKEN 20180524
     ["Incident documentation/20180524-wikidata"]
     {"Incident documentation/20180524-wikidata"=>["435113", "435080", "435079"]}
+    {"Incident documentation/20180524-wikidata"=>["T177453", "T195792"]}
