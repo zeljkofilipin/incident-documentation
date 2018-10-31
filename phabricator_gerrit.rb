@@ -30,11 +30,6 @@ def task_json(phabricator_task)
   -d objectIdentifier=#{phabricator_task}`
 end
 
-def tasks
-  tasks_file = ARGV[1]
-  File.readlines(tasks_file).map(&:strip)
-end
-
 def tasks_repos(tasks)
   tasks.map do |task|
     { task =>
@@ -44,4 +39,11 @@ def tasks_repos(tasks)
   end
 end
 
-output(tasks_repos(tasks))
+if $PROGRAM_NAME == __FILE__
+  def tasks
+    tasks_file = ARGV[1]
+    File.readlines(tasks_file).map(&:strip)
+  end
+
+  output(tasks_repos(tasks))
+end
