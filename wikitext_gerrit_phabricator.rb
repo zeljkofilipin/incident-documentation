@@ -51,7 +51,7 @@ def repository_from_gerrit(patches)
     repository = driver.current_url.split('/r/#/c/')[1].split('/+/')[0]
     driver.quit
     repository
-  end
+  end.uniq
 end
 incidents_gerrit_repository = {}
 incidents.each do |incident|
