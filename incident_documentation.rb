@@ -5,7 +5,7 @@ pp incidents
 
 require_relative 'lib/wikitext'
 wikitext = wikitext(incidents)
-pp wikitext
-
 actionables = actionables(incidents, wikitext)
-pp actionables
+
+gerrit_repos_from_actionables = incidents_gerrit(incidents, actionables)
+pp gerrit_repos_from_actionables

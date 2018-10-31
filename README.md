@@ -13,17 +13,6 @@ Generate a token at `https://phabricator.wikimedia.org/settings/user/USERNAME/pa
 
 ## Example
 
-    $ bundle exec ruby incident_documentation.rb API_TOKEN 20180226
-
-    ["Incident documentation/20180226-WikibaseQualityConstraints"]
-
-    {"Incident documentation/20180226-WikibaseQualityConstraints"=>
-      "== Summary ==\n" +
-    ...
-    "[[Category:Incident documentation]]"}
-
-    {"Incident documentation/20180226-WikibaseQualityConstraints"=>
-    " ==\n" +
-    ...
-    "[[Category:Incident documentation]]"}
-
+    $ bundle exec ruby incident_documentation.rb API_TOKEN 20180524
+    ["Incident documentation/20180524-wikidata"]
+    {"Incident documentation/20180524-wikidata"=>["435113", "435080", "435079"]}
