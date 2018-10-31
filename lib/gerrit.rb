@@ -14,12 +14,3 @@ incidents.each do |incident|
   incidents_gerrit_repository[incident] =
     repository_from_gerrit(incidents_gerrit[incident])
 end
-pp incidents_gerrit_repository
-
-require_relative 'phabricator_gerrit'
-incidents_phabricator_repository = {}
-incidents.each do |incident|
-  incidents_phabricator_repository[incident] =
-    tasks_repos(incidents_phabricator[incident])
-end
-pp incidents_phabricator_repository
