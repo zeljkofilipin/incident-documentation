@@ -2,7 +2,7 @@ def actionables(incidents, incidents_wikitext)
   incidents_actionables = {}
   incidents.each do |incident|
     incidents_actionables[incident] =
-      incidents_wikitext[incident].split('Actionables')[1]
+      actionables_wikitext(incidents_wikitext[incident])
   end
   incidents_actionables
 end

@@ -7,6 +7,7 @@ pp incidents = incidents(incidents_subset)
 
 require_relative 'lib/wikitext'
 wikitext = wikitext(incidents)
+require_relative 'lib/data'
 actionables = actionables(incidents, wikitext)
 
 puts "\nGerrit patches in Actionables section"
