@@ -1,30 +1,31 @@
-# Incidents that start with 20180312
+incidents_subset = ARGV[1]
+puts "\nIncidents that start with #{incidents_subset}"
+# Example: 20180312
 # ["Incident documentation/20180312-Cache-text"]
 require_relative 'lib/wikitech'
-incidents_subset = ARGV[1]
 pp incidents = incidents(incidents_subset)
 
 require_relative 'lib/wikitext'
 wikitext = wikitext(incidents)
 actionables = actionables(incidents, wikitext)
 
-# Gerrit patches in Actionables section
+puts "\nGerrit patches in Actionables section"
 # {"Incident documentation/20180312-Cache-text"=>["419090"]}
 pp gerrit_patches_from_actionables = incidents_gerrit(incidents, actionables)
 
-# Gerrit repositories from Gerrit patches
+puts "\nGerrit repositories from Gerrit patches"
 # {"Incident documentation/20180312-Cache-text"=>["operations/puppet"]}
 require_relative 'lib/gerrit'
 gerrit_repos_from_patches =
   repos_patches(incidents, gerrit_patches_from_actionables)
 pp gerrit_repos_from_patches
 
-# Phabricator tasks in Actionables section
+puts "\nPhabricator tasks in Actionables section"
 # {"Incident documentation/20180312-Cache-text"=>["T181315", "T96853"]}
 pp phabricator_tasks_from_actionables =
      actionables_tasks(incidents, actionables)
 
-# Gerrit repositories from Phabricator tasks verbose
+puts "\nGerrit repositories from Phabricator tasks verbose"
 # {"Incident documentation/20180312-Cache-text"=>
 #   [{"T181315"=>["operations/puppet", "mediawiki/vagrant"]}, {"T96853"=>[]}]}
 require_relative 'lib/phabricator'
@@ -32,7 +33,7 @@ gerrit_repos_from_tasks_verbose =
   repos_tasks_verbose(incidents, phabricator_tasks_from_actionables)
 pp gerrit_repos_from_tasks_verbose
 
-# Gerrit repositories from Phabricator tasks summary
+puts "\nGerrit repositories from Phabricator tasks summary"
 # {"Incident documentation/20180312-Cache-text"=>
 #   ["operations/puppet", "mediawiki/vagrant"]}
 require_relative 'lib/phabricator'
