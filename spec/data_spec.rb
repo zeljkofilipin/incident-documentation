@@ -1,4 +1,4 @@
-# rubocop:disable Metrics/LineLength
+# rubocop:disable Metrics/BlockLength, Metrics/LineLength
 require_relative '../lib/data'
 
 RSpec.describe 'data' do
@@ -29,3 +29,4 @@ RSpec.describe 'data' do
     expect(actionables_wikitext(incident_wikitext)).to eq actionables_wikitext
   end
 end
+# rubocop:enable Metrics/BlockLength, Metrics/LineLength

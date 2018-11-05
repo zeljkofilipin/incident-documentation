@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/AbcSize, Metrics/MethodLength
 def repository_from_gerrit(patches)
   require 'selenium-webdriver'
   options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
@@ -11,6 +12,7 @@ def repository_from_gerrit(patches)
     repository
   end.uniq
 end
+# rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
 def repos_patches(incidents, incidents_gerrit)
   incidents_gerrit_repository = {}
