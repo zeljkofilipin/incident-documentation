@@ -36,7 +36,15 @@ pp gerrit_repos_from_tasks_verbose
 puts "\nGerrit repositories from Phabricator tasks summary"
 # {"Incident documentation/20180312-Cache-text"=>
 #   ["operations/puppet", "mediawiki/vagrant"]}
-require_relative 'lib/phabricator'
 gerrit_repos_from_tasks_summary =
   repos_tasks_summary(incidents, gerrit_repos_from_tasks_verbose)
 pp gerrit_repos_from_tasks_summary
+
+puts "\nGerrit repositories connected to an incident"
+# {"Incident documentation/20180312-Cache-text"=>
+#   ["operations/puppet", "mediawiki/vagrant"]}
+gerrit_repos_from_patches_and_tasks =
+  repos_patches_tasks(
+    incidents, gerrit_repos_from_patches, gerrit_repos_from_tasks_summary
+  )
+pp gerrit_repos_from_patches_and_tasks
