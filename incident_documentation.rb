@@ -2,7 +2,7 @@ incidents_subset = ARGV[1]
 puts "\nIncidents that start with #{incidents_subset}"
 # Example: 20180312
 # ["Incident documentation/20180312-Cache-text"]
-require_relative 'lib/wikitech'
+require_relative 'lib/api'
 pp incidents = incidents(incidents_subset)
 
 require_relative 'lib/wikitext'
