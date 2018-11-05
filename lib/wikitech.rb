@@ -5,6 +5,6 @@ def incidents(subset)
                            format: 'json',
                            list: 'allpages',
                            apprefix: "Incident documentation/#{subset}",
-                           aplimit: '100'
+                           aplimit: '1000'
   response.data['allpages'].map { |element| element['title'] }
 end
