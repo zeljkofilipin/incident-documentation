@@ -1,14 +1,3 @@
-def wikitext(incidents)
-  require 'mediawiki_api'
-  client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
-
-  incidents_wikitext = {}
-  incidents.each do |incident|
-    incidents_wikitext[incident] = client.get_wikitext(incident).body
-  end
-  incidents_wikitext
-end
-
 def actionables(incidents, incidents_wikitext)
   incidents_actionables = {}
   incidents.each do |incident|
