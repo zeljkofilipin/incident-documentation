@@ -2,8 +2,9 @@ def repository_from_gerrit(patches)
   require 'selenium-webdriver'
   patches.map do |patch|
     driver = Selenium::WebDriver.for :firefox
-    driver.navigate.to "https://gerrit.wikimedia.org/r/#/c/#{patch}/"
-    sleep 2
+    patch_url = "https://gerrit.wikimedia.org/r/#/c/#{patch}/"
+    driver.navigate.to patch_url
+    sleep 1 while driver.current_url == patch_url
     repository = driver.current_url.split('/r/#/c/')[1].split('/+/')[0]
     driver.quit
     repository
