@@ -1,11 +1,3 @@
-def gerrit_from_wikitext(wikitext)
-  if wikitext.respond_to?(:scan)
-    wikitext.scan(/\[\[gerrit:(\d{6})\]\]/).flatten.uniq
-  else
-    []
-  end
-end
-
 def incidents_gerrit(incidents, incidents_actionables)
   incidents_gerrit = {}
   incidents.each do |incident|

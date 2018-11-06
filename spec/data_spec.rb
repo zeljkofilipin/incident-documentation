@@ -37,6 +37,9 @@ RSpec.describe 'incident report' do
       actionables_wikitexts = { 'Incident documentation/20180312-Cache-text' => actionables_wikitext }
       expect(actionables(incidents, incidents_wikitext)).to eq actionables_wikitexts
     end
+    it 'extracts gerrit patches from wikitext' do
+      expect(gerrit_from_wikitext(actionables_wikitext)).to eq ['419090']
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/LineLength
