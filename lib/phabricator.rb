@@ -18,15 +18,6 @@ def task_comments(task_json)
   JSON.parse(task_json)
 end
 
-def task_json(phabricator_task)
-  api_token = ARGV[0]
-  `curl \
-  -s \
-  https://phabricator.wikimedia.org/api/transaction.search \
-  -d api.token=#{api_token} \
-  -d objectIdentifier=#{phabricator_task}`
-end
-
 def tasks_repos(tasks)
   tasks.map do |task|
     { task =>
