@@ -2,6 +2,8 @@
 require_relative '../lib/data'
 
 RSpec.describe 'incident report' do
+  incidents = ['Incident documentation/20180312-Cache-text']
+  incidents_patches = { 'Incident documentation/20180312-Cache-text' => ['419090'] }
   context 'wikitext' do
     actionables_wikitext =
       "==\n" \
@@ -10,7 +12,6 @@ RSpec.describe 'incident report' do
       "*Move backend restarts from weekly to bi-weekly (done in [[gerrit:419090]])\n" \
       '*Long term: Move to ATS as caching solution for cache backends ([[phab:T96853]])'
     actionables_wikitexts = { 'Incident documentation/20180312-Cache-text' => actionables_wikitext }
-    incidents = ['Incident documentation/20180312-Cache-text']
     incident_wikitext =
       "This is a draft, edit heavily please.\n" \
       "\n" \
@@ -37,12 +38,18 @@ RSpec.describe 'incident report' do
       incidents_wikitext = { 'Incident documentation/20180312-Cache-text' => incident_wikitext }
       expect(actionables(incidents, incidents_wikitext)).to eq actionables_wikitexts
     end
-    it 'extracts gerrit patches from wikitext' do
+    it 'extracts gerrit patches' do
       expect(gerrit_from_wikitext(actionables_wikitext)).to eq ['419090']
     end
     it 'extracts gerrit patches from incidents' do
-      incidents_patches = { 'Incident documentation/20180312-Cache-text' => ['419090'] }
       expect(incidents_gerrit(incidents, actionables_wikitexts)).to eq incidents_patches
+    end
+  end
+  context 'gerrit' do
+    it 'finds repositories from patches' do
+      # skip 'calls API'
+      incidents_repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet'] }
+      expect(repos_patches(incidents, incidents_patches)).to eq incidents_repos
     end
   end
 end

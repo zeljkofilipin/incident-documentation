@@ -27,3 +27,25 @@ def incidents_gerrit(incidents, incidents_actionables)
   end
   incidents_gerrit
 end
+
+# not unit tested
+
+# calls api#repository_from_gerrit
+#
+# arguments
+#
+# ['Incident documentation/20180312-Cache-text']
+# { 'Incident documentation/20180312-Cache-text' => ['419090'] }
+#
+# returns
+#
+# { 'Incident documentation/20180312-Cache-text' => ['operations/puppet'] }
+require_relative 'api'
+def repos_patches(incidents, incidents_gerrit)
+  incidents_gerrit_repository = {}
+  incidents.each do |incident|
+    incidents_gerrit_repository[incident] =
+      repository_from_gerrit(incidents_gerrit[incident])
+  end
+  incidents_gerrit_repository
+end
