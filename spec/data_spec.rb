@@ -56,6 +56,67 @@ RSpec.describe 'incident report' do
     it 'finds phabricator tasks in actionables' do
       expect(phabricator_from_wikitext(actionables_wikitext)).to eq %w[T181315 T96853]
     end
+    it 'finds gerritbot comments' do
+      gerritbot_comment =
+        { 'id' => 3_792_163,
+          'phid' => 'PHID-XACT-TASK-alqxs7tpvourtxf',
+          'type' => 'comment',
+          'authorPHID' => 'PHID-USER-idceizaw6elwiwm5xshb',
+          'objectPHID' => 'PHID-TASK-bkf7tel6t5kgjabfk4r3',
+          'dateCreated' => 1_511_871_264,
+          'dateModified' => 1_511_871_264,
+          'comments' =>
+         [{ 'id' => 971_358,
+            'phid' => 'PHID-XCMT-6y56yjgvs7kef676f72q',
+            'version' => 1,
+            'authorPHID' => 'PHID-USER-idceizaw6elwiwm5xshb',
+            'dateCreated' => 1_511_871_264,
+            'dateModified' => 1_511_871_264,
+            'removed' => false,
+            'content' =>
+            { 'raw' =>
+              "Change 393751 had a related patch set uploaded (by Gilles; owner: Gilles):\n" \
+                "[operations/puppet@production] Log more detailed info in Varnish slow request log\n" \
+                "\n" \
+                "[[https://gerrit.wikimedia.org/r/393751]]\n" } }],
+          'fields' => {} }
+      gerritbot_comments = [gerritbot_comment]
+      task_comments =
+        { 'result' =>
+        { 'data' =>
+          [{ 'id' => 4_507_959,
+             'phid' => 'PHID-XACT-TASK-y2be6mni5ivq7oy',
+             'type' => nil,
+             'authorPHID' => 'PHID-USER-sai77mtxmpqnm6pycyvz',
+             'objectPHID' => 'PHID-TASK-bkf7tel6t5kgjabfk4r3',
+             'dateCreated' => 1_534_446_481,
+             'dateModified' => 1_534_446_481,
+             'comments' => [],
+             'fields' => {} },
+           { 'id' => 3_792_164,
+             'phid' => 'PHID-XACT-TASK-eej4ofk434dpuer',
+             'type' => nil,
+             'authorPHID' => 'PHID-USER-idceizaw6elwiwm5xshb',
+             'objectPHID' => 'PHID-TASK-bkf7tel6t5kgjabfk4r3',
+             'dateCreated' => 1_511_871_265,
+             'dateModified' => 1_511_871_265,
+             'comments' => [],
+             'fields' => {} },
+           gerritbot_comment,
+           { 'id' => 4_184_335,
+             'phid' => 'PHID-XACT-TASK-6n7rlln6ozsug2e',
+             'type' => nil,
+             'authorPHID' => 'PHID-USER-sai77mtxmpqnm6pycyvz',
+             'objectPHID' => 'PHID-TASK-bkf7tel6t5kgjabfk4r3',
+             'dateCreated' => 1_525_543_968,
+             'dateModified' => 1_525_543_968,
+             'comments' => [],
+             'fields' => {} }],
+          'cursor' => { 'limit' => 100, 'after' => '3788748', 'before' => nil } },
+          'error_code' => nil,
+          'error_info' => nil }
+      expect(gerritbot_comments(task_comments)).to eq gerritbot_comments
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/LineLength

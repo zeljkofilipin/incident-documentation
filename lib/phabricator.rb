@@ -4,15 +4,6 @@ def gerrit_repositories(gerritbot_comments)
   end.uniq.compact
 end
 
-def gerritbot_comments(task_comments)
-  return [] unless task_comments['result']
-
-  task_comments['result']['data'].select do |element|
-    gerritbot = 'PHID-USER-idceizaw6elwiwm5xshb'
-    element['authorPHID'] == gerritbot && !element['comments'].empty?
-  end
-end
-
 def tasks_repos(tasks)
   tasks.map do |task|
     { task =>
