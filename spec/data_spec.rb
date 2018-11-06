@@ -4,13 +4,13 @@ require_relative '../lib/data'
 RSpec.describe 'incident report' do
   incidents = ['Incident documentation/20180312-Cache-text']
   incidents_patches = { 'Incident documentation/20180312-Cache-text' => ['419090'] }
+  actionables_wikitext =
+    "==\n" \
+    "*Continue ongoing related investigations in [[phab:T181315]]\n" \
+    "*Set up paging alerting on backend connections piling up (TBD)\n" \
+    "*Move backend restarts from weekly to bi-weekly (done in [[gerrit:419090]])\n" \
+    '*Long term: Move to ATS as caching solution for cache backends ([[phab:T96853]])'
   context 'wikitext' do
-    actionables_wikitext =
-      "==\n" \
-      "*Continue ongoing related investigations in [[phab:T181315]]\n" \
-      "*Set up paging alerting on backend connections piling up (TBD)\n" \
-      "*Move backend restarts from weekly to bi-weekly (done in [[gerrit:419090]])\n" \
-      '*Long term: Move to ATS as caching solution for cache backends ([[phab:T96853]])'
     actionables_wikitexts = { 'Incident documentation/20180312-Cache-text' => actionables_wikitext }
     incident_wikitext =
       "This is a draft, edit heavily please.\n" \
@@ -50,6 +50,11 @@ RSpec.describe 'incident report' do
       skip 'calls API'
       incidents_repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet'] }
       expect(repos_patches(incidents, incidents_patches)).to eq incidents_repos
+    end
+  end
+  context 'phabricator' do
+    it 'finds phabricator tasks in actionables' do
+      expect(phabricator_from_wikitext(actionables_wikitext)).to eq %w[T181315 T96853]
     end
   end
 end

@@ -28,6 +28,14 @@ def incidents_gerrit(incidents, incidents_actionables)
   incidents_gerrit
 end
 
+def phabricator_from_wikitext(wikitext)
+  if wikitext.respond_to?(:scan)
+    wikitext.scan(/\[\[phab:(T\d{5,6})\]\]/).flatten.uniq
+  else
+    []
+  end
+end
+
 # not unit tested
 
 # calls api#repository_from_gerrit
