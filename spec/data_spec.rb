@@ -47,7 +47,7 @@ RSpec.describe 'incident report' do
   end
   context 'gerrit' do
     it 'finds repositories from patches' do
-      # skip 'calls API'
+      skip 'calls API'
       incidents_repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet'] }
       expect(repos_patches(incidents, incidents_patches)).to eq incidents_repos
     end
