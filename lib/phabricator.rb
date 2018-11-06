@@ -13,11 +13,6 @@ def gerritbot_comments(task_comments)
   end
 end
 
-def task_comments(task_json)
-  require 'json'
-  JSON.parse(task_json)
-end
-
 def tasks_repos(tasks)
   tasks.map do |task|
     { task =>
