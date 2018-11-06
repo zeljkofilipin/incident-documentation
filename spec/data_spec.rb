@@ -3,6 +3,14 @@ require_relative '../lib/data'
 
 RSpec.describe 'incident report' do
   context 'wikitext' do
+    actionables_wikitext =
+      "==\n" \
+      "*Continue ongoing related investigations in [[phab:T181315]]\n" \
+      "*Set up paging alerting on backend connections piling up (TBD)\n" \
+      "*Move backend restarts from weekly to bi-weekly (done in [[gerrit:419090]])\n" \
+      '*Long term: Move to ATS as caching solution for cache backends ([[phab:T96853]])'
+    actionables_wikitexts = { 'Incident documentation/20180312-Cache-text' => actionables_wikitext }
+    incidents = ['Incident documentation/20180312-Cache-text']
     incident_wikitext =
       "This is a draft, edit heavily please.\n" \
       "\n" \
@@ -22,23 +30,19 @@ RSpec.describe 'incident report' do
       "*Set up paging alerting on backend connections piling up (TBD)\n" \
       "*Move backend restarts from weekly to bi-weekly (done in [[gerrit:419090]])\n" \
       '*Long term: Move to ATS as caching solution for cache backends ([[phab:T96853]])'
-    actionables_wikitext =
-      "==\n" \
-      "*Continue ongoing related investigations in [[phab:T181315]]\n" \
-      "*Set up paging alerting on backend connections piling up (TBD)\n" \
-      "*Move backend restarts from weekly to bi-weekly (done in [[gerrit:419090]])\n" \
-      '*Long term: Move to ATS as caching solution for cache backends ([[phab:T96853]])'
     it 'extracts actionables from incident' do
       expect(actionables_wikitext(incident_wikitext)).to eq actionables_wikitext
     end
     it 'extracts actionables from incidents' do
-      incidents = ['Incident documentation/20180312-Cache-text']
       incidents_wikitext = { 'Incident documentation/20180312-Cache-text' => incident_wikitext }
-      actionables_wikitexts = { 'Incident documentation/20180312-Cache-text' => actionables_wikitext }
       expect(actionables(incidents, incidents_wikitext)).to eq actionables_wikitexts
     end
     it 'extracts gerrit patches from wikitext' do
       expect(gerrit_from_wikitext(actionables_wikitext)).to eq ['419090']
+    end
+    it 'extracts gerrit patches from incidents' do
+      incidents_patches = { 'Incident documentation/20180312-Cache-text' => ['419090'] }
+      expect(incidents_gerrit(incidents, actionables_wikitexts)).to eq incidents_patches
     end
   end
 end

@@ -18,3 +18,12 @@ def gerrit_from_wikitext(wikitext)
     []
   end
 end
+
+def incidents_gerrit(incidents, incidents_actionables)
+  incidents_gerrit = {}
+  incidents.each do |incident|
+    incidents_gerrit[incident] =
+      gerrit_from_wikitext(incidents_actionables[incident])
+  end
+  incidents_gerrit
+end
