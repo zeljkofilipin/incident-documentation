@@ -1,3 +1,10 @@
+# arguments
+#
+# '20180312'
+#
+# returns
+#
+# ["Incident documentation/20180312-Cache-text"]
 def incidents(subset)
   require 'mediawiki_api'
   client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
@@ -9,6 +16,14 @@ def incidents(subset)
   response.data['allpages'].map { |element| element['title'] }
 end
 
+# arguments
+#
+# ["419090"]
+#
+# returns
+#
+# ["operations/puppet"]
+#
 # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
 def repository_from_gerrit(patches)
   require 'selenium-webdriver'
@@ -25,6 +40,14 @@ def repository_from_gerrit(patches)
 end
 # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
+# arguments
+#
+# ["Incident documentation/20180312-Cache-text"]
+#
+# returns
+#
+# {"Incident documentation/20180312-Cache-text"=>
+#   "This is a draft, edit heavily please. (...)"}
 def wikitext(incidents)
   require 'mediawiki_api'
   client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
