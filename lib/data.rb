@@ -7,6 +7,15 @@ def actionables(incidents, incidents_wikitext)
   incidents_actionables
 end
 
+def actionables_tasks(incidents, incidents_actionables)
+  incidents_phabricator = {}
+  incidents.each do |incident|
+    incidents_phabricator[incident] =
+      phabricator_from_wikitext(incidents_actionables[incident])
+  end
+  incidents_phabricator
+end
+
 def actionables_wikitext(incidents_wikitext)
   incidents_wikitext.split('Actionables')[1]
 end

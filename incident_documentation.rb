@@ -5,7 +5,6 @@ puts "\nIncidents that start with #{incidents_subset}"
 require_relative 'lib/api'
 pp incidents = incidents(incidents_subset)
 
-require_relative 'lib/wikitext'
 wikitext = wikitext(incidents)
 require_relative 'lib/data'
 actionables = actionables(incidents, wikitext)

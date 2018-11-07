@@ -44,6 +44,10 @@ RSpec.describe 'incident report' do
     it 'extracts gerrit patches from incidents' do
       expect(incidents_gerrit(incidents, actionables_wikitexts)).to eq incidents_patches
     end
+    it 'tasks from wikitext' do
+      incidents_tasks = { 'Incident documentation/20180312-Cache-text' => %w[T181315 T96853] }
+      expect(actionables_tasks(incidents, actionables_wikitexts)).to eq incidents_tasks
+    end
   end
   context 'gerrit' do
     it 'finds repositories from patches' do
