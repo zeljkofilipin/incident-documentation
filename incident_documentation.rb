@@ -46,3 +46,6 @@ gerrit_repos_from_patches_and_tasks =
     incidents, gerrit_repos_from_patches, gerrit_repos_from_tasks_summary
   )
 pp gerrit_repos_from_patches_and_tasks
+
+puts "\nGerrit repositories connected to an incident CSV"
+puts csv(gerrit_repos_from_patches_and_tasks)

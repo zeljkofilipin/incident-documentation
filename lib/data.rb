@@ -20,6 +20,16 @@ def actionables_wikitext(incidents_wikitext)
   incidents_wikitext.split('Actionables')[1]
 end
 
+def csv(incidents_and_repos)
+  incidents_and_repos_csv = ''
+  incidents_and_repos.each do |incident, repos|
+    repos.each do |repo|
+      incidents_and_repos_csv << "#{incident},#{repo}\n"
+    end
+  end
+  incidents_and_repos_csv
+end
+
 def gerrit_from_wikitext(wikitext)
   if wikitext.respond_to?(:scan)
     wikitext.scan(/\[\[gerrit:(\d{6})\]\]/).flatten.uniq

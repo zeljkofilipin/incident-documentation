@@ -158,6 +158,13 @@ RSpec.describe 'incident report' do
       repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet', 'mediawiki/vagrant'] }
       expect(repos_patches_tasks(incidents, repos_from_patches, repos_from_tasks)).to eq repos
     end
+    it 'returns repositories connected to an incident as csv' do
+      incidents_and_repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet', 'mediawiki/vagrant'] }
+      incidents_and_repos_csv =
+        "Incident documentation/20180312-Cache-text,operations/puppet\n"\
+        "Incident documentation/20180312-Cache-text,mediawiki/vagrant\n"
+      expect(csv(incidents_and_repos)).to eq incidents_and_repos_csv
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/LineLength
