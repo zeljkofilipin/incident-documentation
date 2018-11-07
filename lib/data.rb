@@ -43,6 +43,10 @@ def incidents_gerrit(incidents, incidents_actionables)
   incidents_gerrit
 end
 
+def incident_repos(incident)
+  incident.map(&:values).flatten
+end
+
 def phabricator_from_wikitext(wikitext)
   if wikitext.respond_to?(:scan)
     wikitext.scan(/\[\[phab:(T\d{5,6})\]\]/).flatten.uniq

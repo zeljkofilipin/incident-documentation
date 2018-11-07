@@ -132,6 +132,10 @@ RSpec.describe 'incident report' do
           [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }, { 'T96853' => [] }] }
       expect(repos_tasks_verbose(incidents, incidents_tasks)).to eq incidents_tasks_repos
     end
+    it 'finds repositories connected to an incident' do
+      tasks_repos = [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }, { 'T96853' => [] }]
+      expect(incident_repos(tasks_repos)).to eq ['operations/puppet', 'mediawiki/vagrant']
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/LineLength
