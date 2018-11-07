@@ -55,6 +55,10 @@ def phabricator_from_wikitext(wikitext)
   end
 end
 
+def repo_patches_tasks(repos_patches, repos_tasks)
+  (repos_patches + repos_tasks).uniq
+end
+
 def repos_tasks_summary(incidents, incidents_phabricator_repositories)
   incidents_phabricator_repository = {}
   incidents.each do |incident|
