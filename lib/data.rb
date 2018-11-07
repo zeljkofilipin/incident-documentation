@@ -55,6 +55,15 @@ def phabricator_from_wikitext(wikitext)
   end
 end
 
+def repos_tasks_summary(incidents, incidents_phabricator_repositories)
+  incidents_phabricator_repository = {}
+  incidents.each do |incident|
+    incidents_phabricator_repository[incident] =
+      incident_repos(incidents_phabricator_repositories[incident])
+  end
+  incidents_phabricator_repository
+end
+
 def repos_tasks_verbose(incidents, incidents_phabricator)
   incidents_phabricator_repository = {}
   incidents.each do |incident|

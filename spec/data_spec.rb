@@ -77,6 +77,9 @@ RSpec.describe 'incident report' do
               "[[https://gerrit.wikimedia.org/r/393751]]\n" } }],
         'fields' => {} }
     gerritbot_comments = [gerritbot_comment]
+    incidents_tasks_repos =
+      { 'Incident documentation/20180312-Cache-text' =>
+        [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }, { 'T96853' => [] }] }
     it 'finds phabricator tasks in actionables' do
       expect(phabricator_from_wikitext(actionables_wikitext)).to eq %w[T181315 T96853]
     end
@@ -127,14 +130,15 @@ RSpec.describe 'incident report' do
     it 'finds repositories connected to tasks' do
       pending 'returns {"Incident documentation/20180312-Cache-text"=>[{"T181315"=>[]}, {"T96853"=>[]}]}'
       incidents_tasks = { 'Incident documentation/20180312-Cache-text' => %w[T181315 T96853] }
-      incidents_tasks_repos =
-        { 'Incident documentation/20180312-Cache-text' =>
-          [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }, { 'T96853' => [] }] }
       expect(repos_tasks_verbose(incidents, incidents_tasks)).to eq incidents_tasks_repos
     end
     it 'finds repositories connected to an incident' do
       tasks_repos = [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }, { 'T96853' => [] }]
       expect(incident_repos(tasks_repos)).to eq ['operations/puppet', 'mediawiki/vagrant']
+    end
+    it 'finds repositories connected to an incident' do
+      incidents_repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet', 'mediawiki/vagrant'] }
+      expect(repos_tasks_summary(incidents, incidents_tasks_repos)).to eq incidents_repos
     end
   end
 end
