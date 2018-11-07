@@ -1,12 +1,3 @@
-def repos_tasks_verbose(incidents, incidents_phabricator)
-  incidents_phabricator_repository = {}
-  incidents.each do |incident|
-    incidents_phabricator_repository[incident] =
-      tasks_repos(incidents_phabricator[incident])
-  end
-  incidents_phabricator_repository
-end
-
 # Accepts
 # {"Incident documentation/20180312-Cache-text"=>
 #  [{"T181315"=>["operations/puppet", "mediawiki/vagrant"]}, {"T96853"=>[]}]}

@@ -124,6 +124,14 @@ RSpec.describe 'incident report' do
       pending 'returns [{"T181315"=>[]}]'
       expect(tasks_repos(['T181315'])).to eq [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }]
     end
+    it 'finds repositories connected to tasks' do
+      pending 'returns {"Incident documentation/20180312-Cache-text"=>[{"T181315"=>[]}, {"T96853"=>[]}]}'
+      incidents_tasks = { 'Incident documentation/20180312-Cache-text' => %w[T181315 T96853] }
+      incidents_tasks_repos =
+        { 'Incident documentation/20180312-Cache-text' =>
+          [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }, { 'T96853' => [] }] }
+      expect(repos_tasks_verbose(incidents, incidents_tasks)).to eq incidents_tasks_repos
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/LineLength
