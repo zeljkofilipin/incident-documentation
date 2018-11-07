@@ -15,7 +15,6 @@ pp gerrit_patches_from_actionables = incidents_gerrit(incidents, actionables)
 
 puts "\nGerrit repositories from Gerrit patches"
 # {"Incident documentation/20180312-Cache-text"=>["operations/puppet"]}
-require_relative 'lib/gerrit'
 gerrit_repos_from_patches =
   repos_patches(incidents, gerrit_patches_from_actionables)
 pp gerrit_repos_from_patches

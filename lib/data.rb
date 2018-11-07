@@ -68,6 +68,19 @@ def repo_patches_tasks(repos_patches, repos_tasks)
   (repos_patches + repos_tasks).uniq
 end
 
+def repos_patches_tasks(
+  incidents, repos_from_patches, repos_from_tasks
+)
+  incidents_data = {}
+  incidents.each do |incident|
+    incidents_data[incident] =
+      repo_patches_tasks(
+        repos_from_patches[incident], repos_from_tasks[incident]
+      )
+  end
+  incidents_data
+end
+
 def repos_tasks_summary(incidents, incidents_phabricator_repositories)
   incidents_phabricator_repository = {}
   incidents.each do |incident|

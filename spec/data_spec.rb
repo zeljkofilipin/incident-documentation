@@ -151,5 +151,13 @@ RSpec.describe 'incident report' do
       expect(repo_patches_tasks(repos_patches, repos_tasks)).to eq repos
     end
   end
+  context 'report' do
+    it 'returns repositories connected to an incident' do
+      repos_from_patches = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet'] }
+      repos_from_tasks = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet', 'mediawiki/vagrant'] }
+      repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet', 'mediawiki/vagrant'] }
+      expect(repos_patches_tasks(incidents, repos_from_patches, repos_from_tasks)).to eq repos
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/LineLength
