@@ -1,12 +1,3 @@
-def tasks_repos(tasks)
-  tasks.map do |task|
-    { task =>
-      gerrit_repositories(
-        gerritbot_comments(task_comments(task_json(task)))
-      ) }
-  end
-end
-
 def repos_tasks_verbose(incidents, incidents_phabricator)
   incidents_phabricator_repository = {}
   incidents.each do |incident|

@@ -51,6 +51,15 @@ def phabricator_from_wikitext(wikitext)
   end
 end
 
+def tasks_repos(tasks)
+  tasks.map do |task|
+    { task =>
+      gerrit_repositories(
+        gerritbot_comments(task_comments(task_json(task)))
+      ) }
+  end
+end
+
 # not unit tested
 
 # calls api#repository_from_gerrit

@@ -120,6 +120,10 @@ RSpec.describe 'incident report' do
     it 'finds repositories in comments' do
       expect(gerrit_repositories(gerritbot_comments)).to eq ['operations/puppet']
     end
+    it 'finds repositories connected to a task' do
+      pending 'returns [{"T181315"=>[]}]'
+      expect(tasks_repos(['T181315'])).to eq [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }]
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/LineLength
