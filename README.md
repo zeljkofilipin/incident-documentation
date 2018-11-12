@@ -38,3 +38,8 @@ Generate a token at `https://phabricator.wikimedia.org/settings/user/USERNAME/pa
      Gerrit repositories connected to an incident
      {"Incident documentation/20180312-Cache-text"=>
        ["operations/puppet", "mediawiki/vagrant"]}
+
+    Gerrit repositories connected to an incident CSV
+    Incident documentation/20180312-Cache-text,operations/puppet
+    Incident documentation/20180312-Cache-text,mediawiki/vagrant
+
