@@ -118,6 +118,14 @@ def repos_tasks_verbose(incidents, incidents_phabricator)
   incidents_phabricator_repository
 end
 
+def repositories_connected_to_task(task)
+  json = gerrit_api_json(task)
+  patches = array_from_json(json)
+  patches.collect do |patch|
+    patch['project']
+  end.uniq
+end
+
 def tasks_repos(tasks)
   tasks.map do |task|
     { task =>
