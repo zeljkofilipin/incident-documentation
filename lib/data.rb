@@ -20,6 +20,11 @@ def actionables_wikitext(incidents_wikitext)
   incidents_wikitext.split('Actionables')[1]
 end
 
+def array_from_json(json)
+  require 'json'
+  JSON.parse(json)
+end
+
 def csv(incidents_and_repos)
   incidents_and_repos_csv = ''
   incidents_and_repos.each do |incident, repos|
