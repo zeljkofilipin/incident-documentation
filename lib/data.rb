@@ -126,6 +126,12 @@ def repositories_connected_to_task(task)
   end.uniq
 end
 
+def repositories_connected_to_tasks(tasks)
+  tasks.map do |task|
+    { task => repositories_connected_to_task(task) }
+  end
+end
+
 def tasks_repos(tasks)
   tasks.map do |task|
     { task =>
