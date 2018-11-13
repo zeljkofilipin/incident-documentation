@@ -30,6 +30,10 @@ def csv(incidents_and_repos)
   incidents_and_repos_csv
 end
 
+def gerrit_api_json(task)
+  gerrit_api_query(task).sub(")]}'\n", '')
+end
+
 def gerrit_from_wikitext(wikitext)
   if wikitext.respond_to?(:scan)
     wikitext.scan(/\[\[gerrit:(\d{6})\]\]/).flatten.uniq

@@ -1,7 +1,3 @@
-def gerrit_api_json(task)
-  gerrit_api_query(task).sub(")]}'\n", '')
-end
-
 def gerrit_api_query(task)
   `curl 'https://gerrit.wikimedia.org/r/changes/?q=bug:'#{task}`
 end
