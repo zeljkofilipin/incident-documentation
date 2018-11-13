@@ -1,3 +1,7 @@
+def gerrit_api_query(task)
+  `curl 'https://gerrit.wikimedia.org/r/changes/?q=bug:'#{task}`
+end
+
 # arguments
 #
 # '20180312'
