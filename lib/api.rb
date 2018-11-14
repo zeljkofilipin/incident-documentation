@@ -14,6 +14,12 @@ def incidents_response(subset)
   ).data
 end
 
+def incident_wikitext(incident)
+  require 'mediawiki_api'
+  client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
+  client.get_wikitext(incident).body
+end
+
 # arguments
 #
 # ["419090"]
@@ -73,10 +79,4 @@ def task_json(phabricator_task)
   https://phabricator.wikimedia.org/api/transaction.search \
   -d api.token=#{api_token} \
   -d objectIdentifier=#{phabricator_task}`
-end
-
-def incident_wikitext(incident)
-  require 'mediawiki_api'
-  client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
-  client.get_wikitext(incident).body
 end
