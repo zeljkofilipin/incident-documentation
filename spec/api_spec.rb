@@ -309,6 +309,34 @@ RSpec.describe 'api' do
       task = 'T181315'
       expect(gerrit_api_query(task)).to eq response
     end
+    it 'returns almost json for a patch' do
+      json =
+        "{\n" \
+        "  \"id\": \"integration%2Fconfig~master~Id4837ed3c2e3e4cd96dda2bd1492ea5d804128a6\",\n" \
+        "  \"project\": \"integration/config\",\n" \
+        "  \"branch\": \"master\",\n" \
+        "  \"topic\": \"T188742\",\n" \
+        "  \"hashtags\": [],\n" \
+        "  \"change_id\": \"Id4837ed3c2e3e4cd96dda2bd1492ea5d804128a6\",\n" \
+        "  \"subject\": \"Create selenium-daily-beta-WikibaseLexeme Jenkins job\",\n" \
+        "  \"status\": \"NEW\",\n" \
+        "  \"created\": \"2018-09-14 13:23:48.000000000\",\n" \
+        "  \"updated\": \"2018-09-15 09:40:40.000000000\",\n" \
+        "  \"submit_type\": \"REBASE_IF_NECESSARY\",\n" \
+        "  \"insertions\": 4,\n" \
+        "  \"deletions\": 0,\n" \
+        "  \"unresolved_comment_count\": 1,\n" \
+        "  \"work_in_progress\": true,\n" \
+        "  \"has_review_started\": true,\n" \
+        "  \"_number\": 460527,\n" \
+        "  \"owner\": {\n" \
+        "    \"_account_id\": 487\n" \
+        "  }\n" \
+        "}\n"
+      patch = 460527
+      response = ")]}'\n#{json}"
+      expect(gerrit_api_patch(patch)).to eq response
+    end
     it 'returns repository for a patch' do
       expect(patch_repository('419090')).to eq 'operations/puppet'
     end
