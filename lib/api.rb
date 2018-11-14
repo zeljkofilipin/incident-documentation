@@ -80,22 +80,3 @@ def incident_wikitext(incident)
   client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
   client.get_wikitext(incident).body
 end
-
-# arguments
-#
-# ["Incident documentation/20180312-Cache-text"]
-#
-# returns
-#
-# {"Incident documentation/20180312-Cache-text"=>
-#   "This is a draft, edit heavily please. (...)"}
-def wikitext(incidents)
-  require 'mediawiki_api'
-  client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
-
-  incidents_wikitext = {}
-  incidents.each do |incident|
-    incidents_wikitext[incident] = client.get_wikitext(incident).body
-  end
-  incidents_wikitext
-end

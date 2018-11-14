@@ -145,7 +145,15 @@ def tasks_repos(tasks)
   end
 end
 
-# not unit tested
+def incidents_wikitext(incidents)
+  incidents_wikitext = {}
+  incidents.each do |incident|
+    incidents_wikitext[incident] = incident_wikitext(incident)
+  end
+  incidents_wikitext
+end
+
+# NOT UNIT TESTED
 
 # calls api#repository_from_gerrit
 #
