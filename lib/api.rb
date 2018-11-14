@@ -1,5 +1,5 @@
 def gerrit_api_query(task)
-  `curl 'https://gerrit.wikimedia.org/r/changes/?q=bug:'#{task}`
+  `curl -s 'https://gerrit.wikimedia.org/r/changes/?q=bug:'#{task}`
 end
 
 def incidents_response(subset)
