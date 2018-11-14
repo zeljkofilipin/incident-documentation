@@ -610,6 +610,9 @@ RSpec.describe 'incident report' do
            'owner' => { '_account_id' => 1357 } }]
       expect(array_from_json(json)).to eq array
     end
+    it 'returns repositories for patches' do
+      expect(patches_repositories(['419090'])).to eq ['operations/puppet']
+    end
   end
   context 'phabricator' do
     gerritbot_comment =

@@ -79,6 +79,12 @@ def incident_repos(incident)
   incident.map(&:values).flatten
 end
 
+def patches_repositories(patches)
+  patches.map do |patch|
+    patch_repository(patch)
+  end.uniq
+end
+
 def phabricator_from_wikitext(wikitext)
   if wikitext.respond_to?(:scan)
     wikitext.scan(/\[\[phab:(T\d{5,6})\]\]/).flatten.uniq
@@ -145,8 +151,6 @@ end
 
 # NOT UNIT TESTED
 
-# calls api#repository_from_gerrit
-#
 # arguments
 #
 # ['Incident documentation/20180312-Cache-text']
@@ -160,7 +164,7 @@ def repos_patches(incidents, incidents_gerrit)
   incidents_gerrit_repository = {}
   incidents.each do |incident|
     incidents_gerrit_repository[incident] =
-      repository_from_gerrit(incidents_gerrit[incident])
+      patches_repositories(incidents_gerrit[incident])
   end
   incidents_gerrit_repository
 end
