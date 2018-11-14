@@ -75,6 +75,12 @@ def task_json(phabricator_task)
   -d objectIdentifier=#{phabricator_task}`
 end
 
+def incident_wikitext(incident)
+  require 'mediawiki_api'
+  client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
+  client.get_wikitext(incident).body
+end
+
 # arguments
 #
 # ["Incident documentation/20180312-Cache-text"]
