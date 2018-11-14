@@ -333,12 +333,9 @@ RSpec.describe 'api' do
         "    \"_account_id\": 487\n" \
         "  }\n" \
         "}\n"
-      patch = 460527
+      patch = 460_527
       response = ")]}'\n#{json}"
       expect(gerrit_api_patch(patch)).to eq response
-    end
-    it 'returns repository for a patch' do
-      expect(patch_repository('419090')).to eq 'operations/puppet'
     end
   end
   context 'wikitech' do

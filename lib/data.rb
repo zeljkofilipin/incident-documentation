@@ -20,9 +20,8 @@ def actionables_wikitext(incidents_wikitext)
   incidents_wikitext.split('Actionables')[1]
 end
 
-def array_from_json(json)
-  require 'json'
-  JSON.parse(json)
+def almost_json_to_json(almost_json)
+  almost_json.sub(")]}'\n", '')
 end
 
 def csv(incidents_and_repos)
@@ -36,7 +35,7 @@ def csv(incidents_and_repos)
 end
 
 def gerrit_api_json(task)
-  gerrit_api_query(task).sub(")]}'\n", '')
+  almost_json_to_json(gerrit_api_query(task))
 end
 
 def gerrit_from_wikitext(wikitext)
@@ -85,6 +84,11 @@ def incidents_wikitext(incidents)
     incidents_wikitext[incident] = incident_wikitext(incident)
   end
   incidents_wikitext
+end
+
+def parse_json(json)
+  require 'json'
+  JSON.parse(json)
 end
 
 def patches_repositories(patches)
@@ -146,7 +150,7 @@ end
 
 def repositories_connected_to_task(task)
   json = gerrit_api_json(task)
-  patches = array_from_json(json)
+  patches = parse_json(json)
   patches.collect do |patch|
     patch['project']
   end.uniq
@@ -156,4 +160,11 @@ def repositories_connected_to_tasks(tasks)
   tasks.map do |task|
     { task => repositories_connected_to_task(task) }
   end
+end
+
+require_relative 'api'
+def patch_repository(patch)
+  response = gerrit_api_patch(patch)
+  json = almost_json_to_json(response)
+  parse_json(json)['project']
 end

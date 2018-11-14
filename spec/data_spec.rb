@@ -608,10 +608,17 @@ RSpec.describe 'incident report' do
            'has_review_started' => true,
            '_number' => 393_751,
            'owner' => { '_account_id' => 1357 } }]
-      expect(array_from_json(json)).to eq array
+      expect(parse_json(json)).to eq array
+    end
+    it 'returns repository for a patch' do
+      expect(patch_repository('419090')).to eq 'operations/puppet'
     end
     it 'returns repositories for patches' do
       expect(patches_repositories(['419090'])).to eq ['operations/puppet']
+    end
+    it 'converts almost json to json' do
+      almost_json = ")]}'\n#{json}"
+      expect(almost_json_to_json(almost_json)).to eq json
     end
   end
   context 'phabricator' do
