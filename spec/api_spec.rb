@@ -309,6 +309,9 @@ RSpec.describe 'api' do
       task = 'T181315'
       expect(gerrit_api_query(task)).to eq response
     end
+    it 'returns repository for a patch' do
+      expect(patch_repository('419090')).to eq 'operations/puppet'
+    end
   end
   context 'wikitech' do
     it 'returns hash of incidents' do
