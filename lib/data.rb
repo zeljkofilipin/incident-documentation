@@ -113,13 +113,12 @@ def repos_tasks_summary(incidents, incidents_phabricator_repositories)
   incidents_phabricator_repository
 end
 
-def repos_tasks_verbose(incidents, incidents_phabricator)
-  incidents_phabricator_repository = {}
-  incidents.each do |incident|
-    incidents_phabricator_repository[incident] =
-      tasks_repos(incidents_phabricator[incident])
+def repos_tasks_verbose(incidents_tasks)
+  incidents_tasks_repos = {}
+  incidents_tasks.each do |incident, tasks|
+    incidents_tasks_repos[incident] = repositories_connected_to_tasks(tasks)
   end
-  incidents_phabricator_repository
+  incidents_tasks_repos
 end
 
 def repositories_connected_to_task(task)
@@ -133,15 +132,6 @@ end
 def repositories_connected_to_tasks(tasks)
   tasks.map do |task|
     { task => repositories_connected_to_task(task) }
-  end
-end
-
-def tasks_repos(tasks)
-  tasks.map do |task|
-    { task =>
-      gerrit_repositories(
-        gerritbot_comments(task_comments(task_json(task)))
-      ) }
   end
 end
 

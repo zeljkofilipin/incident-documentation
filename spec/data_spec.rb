@@ -688,10 +688,9 @@ RSpec.describe 'incident report' do
     it 'finds repositories connected to tasks' do
       expect(repositories_connected_to_tasks(['T181315'])).to eq [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }]
     end
-    it 'finds repositories connected to tasks' do
-      pending 'returns {"Incident documentation/20180312-Cache-text"=>[{"T181315"=>[]}, {"T96853"=>[]}]}'
+    it 'returns incidents, related tasks and related repositories' do
       incidents_tasks = { 'Incident documentation/20180312-Cache-text' => %w[T181315 T96853] }
-      expect(repos_tasks_verbose(incidents, incidents_tasks)).to eq incidents_tasks_repos
+      expect(repos_tasks_verbose(incidents_tasks)).to eq incidents_tasks_repos
     end
     it 'finds repositories connected to an incident' do
       tasks_repos = [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }, { 'T96853' => [] }]

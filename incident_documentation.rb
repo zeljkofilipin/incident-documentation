@@ -29,7 +29,7 @@ puts "\nGerrit repositories from Phabricator tasks verbose"
 # {"Incident documentation/20180312-Cache-text"=>
 #   [{"T181315"=>["operations/puppet", "mediawiki/vagrant"]}, {"T96853"=>[]}]}
 gerrit_repos_from_tasks_verbose =
-  repos_tasks_verbose(incidents, phabricator_tasks_from_actionables)
+  repos_tasks_verbose(phabricator_tasks_from_actionables)
 pp gerrit_repos_from_tasks_verbose
 
 puts "\nGerrit repositories from Phabricator tasks summary"
