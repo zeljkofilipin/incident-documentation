@@ -10,6 +10,13 @@ RSpec.describe 'incident report' do
     "*Set up paging alerting on backend connections piling up (TBD)\n" \
     "*Move backend restarts from weekly to bi-weekly (done in [[gerrit:419090]])\n" \
     '*Long term: Move to ATS as caching solution for cache backends ([[phab:T96853]])'
+  context 'wikitech' do
+    it 'returns list of incidents' do
+      subset = '20180312'
+      incidents = ['Incident documentation/20180312-Cache-text']
+      expect(incidents(subset)).to eq incidents
+    end
+  end
   context 'wikitext' do
     actionables_wikitexts = { 'Incident documentation/20180312-Cache-text' => actionables_wikitext }
     incident_wikitext =

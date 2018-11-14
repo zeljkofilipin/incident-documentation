@@ -2,22 +2,16 @@ def gerrit_api_query(task)
   `curl 'https://gerrit.wikimedia.org/r/changes/?q=bug:'#{task}`
 end
 
-# arguments
-#
-# '20180312'
-#
-# returns
-#
-# ["Incident documentation/20180312-Cache-text"]
-def incidents(subset)
+def incidents_response(subset)
   require 'mediawiki_api'
   client = MediawikiApi::Client.new 'https://wikitech.wikimedia.org/w/api.php'
-  response = client.action :query,
-                           format: 'json',
-                           list: 'allpages',
-                           apprefix: "Incident documentation/#{subset}",
-                           aplimit: '1000'
-  response.data['allpages'].map { |element| element['title'] }
+  client.action(
+    :query,
+    format: 'json',
+    list: 'allpages',
+    apprefix: "Incident documentation/#{subset}",
+    aplimit: '1000'
+  ).data
 end
 
 # arguments

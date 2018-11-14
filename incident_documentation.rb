@@ -1,12 +1,13 @@
+require_relative 'lib/api'
+require_relative 'lib/data'
+
 incidents_subset = ARGV[1]
 puts "\nIncidents that start with #{incidents_subset}"
 # Example: 20180312
 # ["Incident documentation/20180312-Cache-text"]
-require_relative 'lib/api'
 pp incidents = incidents(incidents_subset)
 
 wikitext = wikitext(incidents)
-require_relative 'lib/data'
 actionables = actionables(incidents, wikitext)
 
 puts "\nGerrit patches in Actionables section"

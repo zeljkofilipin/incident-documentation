@@ -62,6 +62,10 @@ def gerrit_repositories(gerritbot_comments)
   end.uniq.compact
 end
 
+def incidents(subset)
+  incidents_response(subset)['allpages'].map { |element| element['title'] }
+end
+
 def incidents_gerrit(incidents, incidents_actionables)
   incidents_gerrit = {}
   incidents.each do |incident|

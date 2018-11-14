@@ -310,5 +310,16 @@ RSpec.describe 'api' do
       expect(gerrit_api_query(task)).to eq response
     end
   end
+  context 'wikitech' do
+    it 'returns hash of incidents' do
+      subset = '20180312'
+      incidents_response =
+        { 'allpages' =>
+          [{ 'pageid' => 442_153,
+             'ns' => 0,
+             'title' => 'Incident documentation/20180312-Cache-text' }] }
+      expect(incidents_response(subset)).to eq incidents_response
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/LineLength
