@@ -47,6 +47,12 @@ def gerrit_from_wikitext(wikitext)
   end
 end
 
+def gerrit_repositories(gerritbot_comments)
+  gerritbot_comments.map do |element|
+    element['comments'][0]['content']['raw'].split('[')[1].split('@')[0]
+  end.uniq.compact
+end
+
 def gerritbot_comments(task_comments)
   return [] unless task_comments['result']
 
@@ -54,12 +60,6 @@ def gerritbot_comments(task_comments)
     gerritbot = 'PHID-USER-idceizaw6elwiwm5xshb'
     element['authorPHID'] == gerritbot && !element['comments'].empty?
   end
-end
-
-def gerrit_repositories(gerritbot_comments)
-  gerritbot_comments.map do |element|
-    element['comments'][0]['content']['raw'].split('[')[1].split('@')[0]
-  end.uniq.compact
 end
 
 def incidents(subset)
@@ -79,6 +79,14 @@ def incident_repos(incident)
   incident.map(&:values).flatten
 end
 
+def incidents_wikitext(incidents)
+  incidents_wikitext = {}
+  incidents.each do |incident|
+    incidents_wikitext[incident] = incident_wikitext(incident)
+  end
+  incidents_wikitext
+end
+
 def patches_repositories(patches)
   patches.map do |patch|
     patch_repository(patch)
@@ -91,6 +99,15 @@ def phabricator_from_wikitext(wikitext)
   else
     []
   end
+end
+
+def repos_patches(incidents, incidents_gerrit)
+  incidents_gerrit_repository = {}
+  incidents.each do |incident|
+    incidents_gerrit_repository[incident] =
+      patches_repositories(incidents_gerrit[incident])
+  end
+  incidents_gerrit_repository
 end
 
 def repo_patches_tasks(repos_patches, repos_tasks)
@@ -139,32 +156,4 @@ def repositories_connected_to_tasks(tasks)
   tasks.map do |task|
     { task => repositories_connected_to_task(task) }
   end
-end
-
-def incidents_wikitext(incidents)
-  incidents_wikitext = {}
-  incidents.each do |incident|
-    incidents_wikitext[incident] = incident_wikitext(incident)
-  end
-  incidents_wikitext
-end
-
-# NOT UNIT TESTED
-
-# arguments
-#
-# ['Incident documentation/20180312-Cache-text']
-# { 'Incident documentation/20180312-Cache-text' => ['419090'] }
-#
-# returns
-#
-# { 'Incident documentation/20180312-Cache-text' => ['operations/puppet'] }
-require_relative 'api'
-def repos_patches(incidents, incidents_gerrit)
-  incidents_gerrit_repository = {}
-  incidents.each do |incident|
-    incidents_gerrit_repository[incident] =
-      patches_repositories(incidents_gerrit[incident])
-  end
-  incidents_gerrit_repository
 end
