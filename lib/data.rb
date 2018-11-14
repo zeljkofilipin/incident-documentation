@@ -164,13 +164,3 @@ def repos_patches(incidents, incidents_gerrit)
   end
   incidents_gerrit_repository
 end
-
-# converts json to hash
-#
-# arguments: json
-#
-# returns: hash
-def task_comments(task_json)
-  require 'json'
-  JSON.parse(task_json)
-end

@@ -1,7 +1,7 @@
 require_relative 'lib/api'
 require_relative 'lib/data'
 
-incidents_subset = ARGV[1]
+incidents_subset = ARGV[0]
 puts "\nIncidents that start with #{incidents_subset}"
 # Example: 20180312
 # ["Incident documentation/20180312-Cache-text"]
