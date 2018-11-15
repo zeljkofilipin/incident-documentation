@@ -46,21 +46,6 @@ def gerrit_from_wikitext(wikitext)
   end
 end
 
-def gerrit_repositories(gerritbot_comments)
-  gerritbot_comments.map do |element|
-    element['comments'][0]['content']['raw'].split('[')[1].split('@')[0]
-  end.uniq.compact
-end
-
-def gerritbot_comments(task_comments)
-  return [] unless task_comments['result']
-
-  task_comments['result']['data'].select do |element|
-    gerritbot = 'PHID-USER-idceizaw6elwiwm5xshb'
-    element['authorPHID'] == gerritbot && !element['comments'].empty?
-  end
-end
-
 def incidents(subset)
   incidents_response(subset)['allpages'].map { |element| element['title'] }
 end
