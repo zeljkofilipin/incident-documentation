@@ -1,12 +1,3 @@
-def actionables_tasks(incidents, incidents_actionables)
-  incidents_phabricator = {}
-  incidents.each do |incident|
-    incidents_phabricator[incident] =
-      phabricator_from_wikitext(incidents_actionables[incident])
-  end
-  incidents_phabricator
-end
-
 def actionables_wikitext(incidents_wikitext)
   incidents_wikitext.split('Actionables')[1]
 end
@@ -61,6 +52,15 @@ end
 
 def incident_repos(incident)
   incident.map(&:values).flatten
+end
+
+def incidents_tasks(incidents_actionables)
+  incidents_tasks = {}
+  incidents_actionables.each do |incident, actionables|
+    incidents_tasks[incident] =
+      phabricator_from_wikitext(actionables)
+  end
+  incidents_tasks
 end
 
 def incidents_wikitext(incidents)

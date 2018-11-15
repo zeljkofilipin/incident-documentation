@@ -63,7 +63,7 @@ RSpec.describe 'incident report' do
     end
     it 'tasks from wikitext' do
       incidents_tasks = { incident => tasks }
-      expect(actionables_tasks(incidents, incidents_actionables)).to eq incidents_tasks
+      expect(incidents_tasks(incidents_actionables)).to eq incidents_tasks
     end
   end
   context 'gerrit' do

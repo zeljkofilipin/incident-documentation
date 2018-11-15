@@ -23,7 +23,7 @@ pp gerrit_repos_from_patches
 puts "\nPhabricator tasks in Actionables section"
 # {"Incident documentation/20180312-Cache-text"=>["T181315", "T96853"]}
 pp phabricator_tasks_from_actionables =
-     actionables_tasks(incidents, actionables)
+     incidents_tasks(actionables)
 
 puts "\nGerrit repositories from Phabricator tasks verbose"
 # {"Incident documentation/20180312-Cache-text"=>
