@@ -54,6 +54,15 @@ def incident_repos(incident)
   incident.map(&:values).flatten
 end
 
+def incidents_repos(incidents_patches)
+  incidents_repos = {}
+  incidents_patches.each do |incident, patches|
+    incidents_repos[incident] =
+      patches_repositories(patches)
+  end
+  incidents_repos
+end
+
 def incidents_tasks(incidents_actionables)
   incidents_tasks = {}
   incidents_actionables.each do |incident, actionables|
@@ -88,15 +97,6 @@ def phabricator_from_wikitext(wikitext)
   else
     []
   end
-end
-
-def repos_patches(incidents, incidents_gerrit)
-  incidents_gerrit_repository = {}
-  incidents.each do |incident|
-    incidents_gerrit_repository[incident] =
-      patches_repositories(incidents_gerrit[incident])
-  end
-  incidents_gerrit_repository
 end
 
 def repo_patches_tasks(repos_patches, repos_tasks)

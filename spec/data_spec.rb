@@ -370,7 +370,7 @@ RSpec.describe 'incident report' do
       "]\n"
     it 'finds repositories from patches' do
       incidents_repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet'] }
-      expect(repos_patches(incidents, incidents_patches)).to eq incidents_repos
+      expect(incidents_repos(incidents_patches)).to eq incidents_repos
     end
     it 'returns json for a task' do
       task = 'T181315'

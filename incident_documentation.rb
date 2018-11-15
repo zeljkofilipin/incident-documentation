@@ -17,7 +17,7 @@ pp gerrit_patches_from_actionables = incidents_patches(actionables)
 puts "\nGerrit repositories from Gerrit patches"
 # {"Incident documentation/20180312-Cache-text"=>["operations/puppet"]}
 gerrit_repos_from_patches =
-  repos_patches(incidents, gerrit_patches_from_actionables)
+  incidents_repos(gerrit_patches_from_actionables)
 pp gerrit_repos_from_patches
 
 puts "\nPhabricator tasks in Actionables section"
