@@ -4,8 +4,10 @@ require_relative '../lib/data'
 RSpec.describe 'incident report' do
   incident = 'Incident documentation/20180312-Cache-text'
   incidents = [incident]
-  incidents_patches = { incident => ['419090'] }
-  incident_wikitext =
+  patch = '419090'
+  patches = [patch]
+  incidents_patches = { incident => patches }
+  wikitext =
     "This is a draft, edit heavily please.\n" \
     "\n" \
     "==Summary==\n" \
@@ -25,8 +27,8 @@ RSpec.describe 'incident report' do
     "*Set up paging alerting on backend connections piling up (TBD)\n" \
     "*Move backend restarts from weekly to bi-weekly (done in [[gerrit:419090]])\n" \
     '*Long term: Move to ATS as caching solution for cache backends ([[phab:T96853]])'
-  incidents_wikitext = { incident => incident_wikitext }
-  actionables_wikitext =
+  incidents_wikitext = { incident => wikitext }
+  actionables =
     "==\n" \
     "*Continue ongoing related investigations in [[phab:T181315]]\n" \
     "*Set up paging alerting on backend connections piling up (TBD)\n" \
@@ -34,30 +36,34 @@ RSpec.describe 'incident report' do
     '*Long term: Move to ATS as caching solution for cache backends ([[phab:T96853]])'
   context 'wikitech' do
     it 'returns list of incidents' do
-      subset = '20180312'
-      expect(incidents(subset)).to eq incidents
+      date = '20180312'
+      expect(incidents(date)).to eq incidents
     end
     it 'returns incidents and their wikitext' do
       expect(incidents_wikitext(incidents)).to eq incidents_wikitext
     end
   end
   context 'wikitext' do
-    actionables_wikitexts = { incident => actionables_wikitext }
+    incidents_actionables = { incident => actionables }
+    tasks = %w[T181315 T96853]
     it 'extracts actionables from incident' do
-      expect(actionables_wikitext(incident_wikitext)).to eq actionables_wikitext
+      expect(actionables_wikitext(wikitext)).to eq actionables
     end
     it 'extracts actionables from incidents' do
-      expect(actionables_wikitexts(incidents_wikitext)).to eq actionables_wikitexts
+      expect(actionables_wikitexts(incidents_wikitext)).to eq incidents_actionables
     end
     it 'extracts gerrit patches' do
-      expect(gerrit_from_wikitext(actionables_wikitext)).to eq ['419090']
+      expect(gerrit_from_wikitext(actionables)).to eq patches
     end
     it 'extracts gerrit patches from incidents' do
-      expect(incidents_gerrit(incidents, actionables_wikitexts)).to eq incidents_patches
+      expect(incidents_gerrit(incidents, incidents_actionables)).to eq incidents_patches
+    end
+    it 'finds phabricator tasks in actionables' do
+      expect(phabricator_from_wikitext(actionables)).to eq tasks
     end
     it 'tasks from wikitext' do
-      incidents_tasks = { incident => %w[T181315 T96853] }
-      expect(actionables_tasks(incidents, actionables_wikitexts)).to eq incidents_tasks
+      incidents_tasks = { incident => tasks }
+      expect(actionables_tasks(incidents, incidents_actionables)).to eq incidents_tasks
     end
   end
   context 'gerrit' do
@@ -625,9 +631,6 @@ RSpec.describe 'incident report' do
     incidents_tasks_repos =
       { 'Incident documentation/20180312-Cache-text' =>
         [{ 'T181315' => ['operations/puppet', 'mediawiki/vagrant'] }, { 'T96853' => [] }] }
-    it 'finds phabricator tasks in actionables' do
-      expect(phabricator_from_wikitext(actionables_wikitext)).to eq %w[T181315 T96853]
-    end
     it 'finds repositories connected to a task' do
       expect(repositories_connected_to_task('T181315')).to eq ['operations/puppet', 'mediawiki/vagrant']
     end
