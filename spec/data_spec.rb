@@ -47,7 +47,7 @@ RSpec.describe 'incident report' do
       expect(actionables_wikitext(incident_wikitext)).to eq actionables_wikitext
     end
     it 'extracts actionables from incidents' do
-      expect(actionables(incidents, incidents_wikitext)).to eq actionables_wikitexts
+      expect(actionables_wikitexts(incidents_wikitext)).to eq actionables_wikitexts
     end
     it 'extracts gerrit patches' do
       expect(gerrit_from_wikitext(actionables_wikitext)).to eq ['419090']

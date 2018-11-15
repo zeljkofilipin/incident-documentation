@@ -8,7 +8,7 @@ puts "\nIncidents that start with #{incidents_subset}"
 pp incidents = incidents(incidents_subset)
 
 wikitext = incidents_wikitext(incidents)
-actionables = actionables(incidents, wikitext)
+actionables = actionables_wikitexts(wikitext)
 
 puts "\nGerrit patches in Actionables section"
 # {"Incident documentation/20180312-Cache-text"=>["419090"]}

@@ -1,12 +1,3 @@
-def actionables(incidents, incidents_wikitext)
-  incidents_actionables = {}
-  incidents.each do |incident|
-    incidents_actionables[incident] =
-      actionables_wikitext(incidents_wikitext[incident])
-  end
-  incidents_actionables
-end
-
 def actionables_tasks(incidents, incidents_actionables)
   incidents_phabricator = {}
   incidents.each do |incident|
@@ -18,6 +9,15 @@ end
 
 def actionables_wikitext(incidents_wikitext)
   incidents_wikitext.split('Actionables')[1]
+end
+
+def actionables_wikitexts(incidents_wikitext)
+  incidents_actionables = {}
+  incidents_wikitext.each do |incident, wikitext|
+    incidents_actionables[incident] =
+      actionables_wikitext(wikitext)
+  end
+  incidents_actionables
 end
 
 def almost_json_to_json(almost_json)
