@@ -56,7 +56,7 @@ RSpec.describe 'incident report' do
       expect(gerrit_from_wikitext(actionables)).to eq patches
     end
     it 'extracts gerrit patches from incidents' do
-      expect(incidents_gerrit(incidents, incidents_actionables)).to eq incidents_patches
+      expect(incidents_patches(incidents_actionables)).to eq incidents_patches
     end
     it 'finds phabricator tasks in actionables' do
       expect(phabricator_from_wikitext(actionables)).to eq tasks

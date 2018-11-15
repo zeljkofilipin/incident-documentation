@@ -50,13 +50,13 @@ def incidents(subset)
   incidents_response(subset)['allpages'].map { |element| element['title'] }
 end
 
-def incidents_gerrit(incidents, incidents_actionables)
-  incidents_gerrit = {}
-  incidents.each do |incident|
-    incidents_gerrit[incident] =
-      gerrit_from_wikitext(incidents_actionables[incident])
+def incidents_patches(incidents_actionables)
+  incidents_patches = {}
+  incidents_actionables.each do |incident, actionables|
+    incidents_patches[incident] =
+      gerrit_from_wikitext(actionables)
   end
-  incidents_gerrit
+  incidents_patches
 end
 
 def incident_repos(incident)

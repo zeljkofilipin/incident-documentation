@@ -12,7 +12,7 @@ actionables = actionables_wikitexts(wikitext)
 
 puts "\nGerrit patches in Actionables section"
 # {"Incident documentation/20180312-Cache-text"=>["419090"]}
-pp gerrit_patches_from_actionables = incidents_gerrit(incidents, actionables)
+pp gerrit_patches_from_actionables = incidents_patches(actionables)
 
 puts "\nGerrit repositories from Gerrit patches"
 # {"Incident documentation/20180312-Cache-text"=>["operations/puppet"]}
