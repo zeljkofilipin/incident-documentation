@@ -12,24 +12,21 @@ incidents_actionables = incidents_actionables(incidents_wikitext)
 
 puts "\nGerrit patches in Actionables section"
 # {"Incident documentation/20180312-Cache-text"=>["419090"]}
-pp gerrit_patches_from_actionables = incidents_patches(incidents_actionables)
+pp incidents_patches = incidents_patches(incidents_actionables)
 
 puts "\nGerrit repositories from Gerrit patches"
 # {"Incident documentation/20180312-Cache-text"=>["operations/puppet"]}
-gerrit_repos_from_patches =
-  incidents_repos(gerrit_patches_from_actionables)
-pp gerrit_repos_from_patches
+pp incidents_repos = incidents_repos(incidents_patches)
 
 puts "\nPhabricator tasks in Actionables section"
 # {"Incident documentation/20180312-Cache-text"=>["T181315", "T96853"]}
-pp phabricator_tasks_from_actionables =
-     incidents_tasks(incidents_actionables)
+pp incidents_tasks = incidents_tasks(incidents_actionables)
 
 puts "\nGerrit repositories from Phabricator tasks verbose"
 # {"Incident documentation/20180312-Cache-text"=>
 #   [{"T181315"=>["operations/puppet", "mediawiki/vagrant"]}, {"T96853"=>[]}]}
 gerrit_repos_from_tasks_verbose =
-  repos_tasks_verbose(phabricator_tasks_from_actionables)
+  repos_tasks_verbose(incidents_tasks)
 pp gerrit_repos_from_tasks_verbose
 
 puts "\nGerrit repositories from Phabricator tasks summary"
@@ -44,7 +41,7 @@ puts "\nGerrit repositories connected to an incident"
 #   ["operations/puppet", "mediawiki/vagrant"]}
 gerrit_repos_from_patches_and_tasks =
   repos_patches_tasks(
-    incidents, gerrit_repos_from_patches, gerrit_repos_from_tasks_summary
+    incidents, incidents_repos, gerrit_repos_from_tasks_summary
   )
 pp gerrit_repos_from_patches_and_tasks
 
