@@ -47,7 +47,7 @@ RSpec.describe 'incident report' do
     incidents_actionables = { incident => actionables }
     tasks = %w[T181315 T96853]
     it 'extracts actionables from incident' do
-      expect(actionables_wikitext(wikitext)).to eq actionables
+      expect(actionables(wikitext)).to eq actionables
     end
     it 'extracts actionables from incidents' do
       expect(incidents_actionables(incidents_wikitext)).to eq incidents_actionables

@@ -1,10 +1,10 @@
-def actionables_wikitext(incidents_wikitext)
-  incidents_wikitext.split('Actionables')[1]
+def actionables(wikitext)
+  wikitext.split('Actionables')[1]
 end
 
 def incidents_actionables(incidents_wikitext)
   incidents_wikitext.transform_values do |wikitext|
-    actionables_wikitext(wikitext)
+    actionables(wikitext)
   end
 end
 
