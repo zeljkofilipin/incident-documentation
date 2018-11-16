@@ -7,12 +7,12 @@ puts "\nIncidents that start with #{incidents_subset}"
 # ["Incident documentation/20180312-Cache-text"]
 pp incidents = incidents(incidents_subset)
 
-wikitext = incidents_wikitext(incidents)
-actionables = actionables_wikitexts(wikitext)
+incidents_wikitext = incidents_wikitext(incidents)
+incidents_actionables = incidents_actionables(incidents_wikitext)
 
 puts "\nGerrit patches in Actionables section"
 # {"Incident documentation/20180312-Cache-text"=>["419090"]}
-pp gerrit_patches_from_actionables = incidents_patches(actionables)
+pp gerrit_patches_from_actionables = incidents_patches(incidents_actionables)
 
 puts "\nGerrit repositories from Gerrit patches"
 # {"Incident documentation/20180312-Cache-text"=>["operations/puppet"]}
@@ -23,7 +23,7 @@ pp gerrit_repos_from_patches
 puts "\nPhabricator tasks in Actionables section"
 # {"Incident documentation/20180312-Cache-text"=>["T181315", "T96853"]}
 pp phabricator_tasks_from_actionables =
-     incidents_tasks(actionables)
+     incidents_tasks(incidents_actionables)
 
 puts "\nGerrit repositories from Phabricator tasks verbose"
 # {"Incident documentation/20180312-Cache-text"=>

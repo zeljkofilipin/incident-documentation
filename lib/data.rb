@@ -2,13 +2,10 @@ def actionables_wikitext(incidents_wikitext)
   incidents_wikitext.split('Actionables')[1]
 end
 
-def actionables_wikitexts(incidents_wikitext)
-  incidents_actionables = {}
-  incidents_wikitext.each do |incident, wikitext|
-    incidents_actionables[incident] =
-      actionables_wikitext(wikitext)
+def incidents_actionables(incidents_wikitext)
+  incidents_wikitext.transform_values do |wikitext|
+    actionables_wikitext(wikitext)
   end
-  incidents_actionables
 end
 
 def almost_json_to_json(almost_json)
