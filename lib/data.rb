@@ -122,12 +122,10 @@ def repos_tasks_summary(incidents, incidents_phabricator_repositories)
   incidents_phabricator_repository
 end
 
-def repos_tasks_verbose(incidents_tasks)
-  incidents_tasks_repos = {}
-  incidents_tasks.each do |incident, tasks|
-    incidents_tasks_repos[incident] = repositories_connected_to_tasks(tasks)
+def incidents_tasks_repos(incidents_tasks)
+  incidents_tasks.transform_values do |tasks|
+    repositories_connected_to_tasks(tasks)
   end
-  incidents_tasks_repos
 end
 
 def repositories_connected_to_task(task)

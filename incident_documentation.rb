@@ -25,15 +25,13 @@ pp incidents_tasks = incidents_tasks(incidents_actionables)
 puts "\nGerrit repositories from Phabricator tasks verbose"
 # {"Incident documentation/20180312-Cache-text"=>
 #   [{"T181315"=>["operations/puppet", "mediawiki/vagrant"]}, {"T96853"=>[]}]}
-gerrit_repos_from_tasks_verbose =
-  repos_tasks_verbose(incidents_tasks)
-pp gerrit_repos_from_tasks_verbose
+pp incidents_tasks_repos = incidents_tasks_repos(incidents_tasks)
 
 puts "\nGerrit repositories from Phabricator tasks summary"
 # {"Incident documentation/20180312-Cache-text"=>
 #   ["operations/puppet", "mediawiki/vagrant"]}
 gerrit_repos_from_tasks_summary =
-  repos_tasks_summary(incidents, gerrit_repos_from_tasks_verbose)
+  repos_tasks_summary(incidents, incidents_tasks_repos)
 pp gerrit_repos_from_tasks_summary
 
 puts "\nGerrit repositories connected to an incident"
