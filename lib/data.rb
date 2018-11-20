@@ -55,12 +55,9 @@ def incidents_repos(incidents_patches)
 end
 
 def incidents_tasks(incidents_actionables)
-  incidents_tasks = {}
-  incidents_actionables.each do |incident, actionables|
-    incidents_tasks[incident] =
-      phabricator_from_wikitext(actionables)
+  incidents_actionables.transform_values do |actionables|
+    phabricator_from_wikitext(actionables)
   end
-  incidents_tasks
 end
 
 def incidents_wikitext(incidents)
