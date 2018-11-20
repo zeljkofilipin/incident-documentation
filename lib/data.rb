@@ -48,7 +48,7 @@ def incident_repos(incident)
   incident.map(&:values).flatten
 end
 
-def incidents_repos(incidents_patches)
+def incidents_repos_from_patches(incidents_patches)
   incidents_patches.transform_values do |patches|
     repositories(patches)
   end
@@ -92,10 +92,10 @@ def uniq_repos(repos_patches, repos_tasks)
 end
 
 def incidents_repos_uniq(
-  incidents_repos_patches, incidents_repos_tasks
+  incidents_repos_from_patches, incidents_repos_from_tasks
 )
-  incidents_repos_patches.merge(
-    incidents_repos_tasks
+  incidents_repos_from_patches.merge(
+    incidents_repos_from_tasks
   ) do |_, repos_patches, repos_tasks|
     uniq_repos(repos_patches, repos_tasks)
   end

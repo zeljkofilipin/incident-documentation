@@ -16,7 +16,8 @@ pp incidents_patches = incidents_patches(incidents_actionables)
 
 puts "\nGerrit repositories from Gerrit patches"
 # {"Incident documentation/20180312-Cache-text"=>["operations/puppet"]}
-pp incidents_repos = incidents_repos(incidents_patches)
+pp incidents_repos_from_patches =
+     incidents_repos_from_patches(incidents_patches)
 
 puts "\nPhabricator tasks in Actionables section"
 # {"Incident documentation/20180312-Cache-text"=>["T181315", "T96853"]}
@@ -39,7 +40,7 @@ puts "\nGerrit repositories connected to an incident"
 #   ["operations/puppet", "mediawiki/vagrant"]}
 gerrit_repos_from_patches_and_tasks =
   incidents_repos_uniq(
-    incidents_repos, gerrit_repos_from_tasks_summary
+    incidents_repos_from_patches, gerrit_repos_from_tasks_summary
   )
 pp gerrit_repos_from_patches_and_tasks
 
