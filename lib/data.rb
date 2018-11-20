@@ -50,7 +50,7 @@ end
 
 def incidents_repos(incidents_patches)
   incidents_patches.transform_values do |patches|
-    patches_repositories(patches)
+    repositories(patches)
   end
 end
 
@@ -73,7 +73,7 @@ def parse_json(json)
   JSON.parse(json)
 end
 
-def patches_repositories(patches)
+def repositories(patches)
   patches.map do |patch|
     patch_repository(patch)
   end.uniq

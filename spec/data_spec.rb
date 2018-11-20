@@ -620,7 +620,7 @@ RSpec.describe 'incident report' do
       expect(patch_repository('419090')).to eq 'operations/puppet'
     end
     it 'returns repositories for patches' do
-      expect(patches_repositories(['419090'])).to eq ['operations/puppet']
+      expect(repositories(['419090'])).to eq ['operations/puppet']
     end
     it 'converts almost json to json' do
       almost_json = ")]}'\n#{json}"
