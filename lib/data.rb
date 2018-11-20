@@ -91,7 +91,7 @@ def uniq_repos(repos_patches, repos_tasks)
   (repos_patches + repos_tasks).uniq
 end
 
-def incidents_repos_uniq(
+def incidents_repos(
   incidents_repos_from_patches, incidents_repos_from_tasks
 )
   incidents_repos_from_patches.merge(

@@ -37,11 +37,9 @@ pp incidents_repos_from_tasks =
 puts "\nGerrit repositories connected to an incident"
 # {"Incident documentation/20180312-Cache-text"=>
 #   ["operations/puppet", "mediawiki/vagrant"]}
-gerrit_repos_from_patches_and_tasks =
-  incidents_repos_uniq(
-    incidents_repos_from_patches, incidents_repos_from_tasks
-  )
-pp gerrit_repos_from_patches_and_tasks
+pp incidents_repos = incidents_repos(
+  incidents_repos_from_patches, incidents_repos_from_tasks
+)
 
 puts "\nGerrit repositories connected to an incident CSV"
-puts csv(gerrit_repos_from_patches_and_tasks)
+puts csv(incidents_repos)
