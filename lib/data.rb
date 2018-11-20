@@ -2,16 +2,6 @@ def actionables(wikitext)
   wikitext.split('Actionables')[1]
 end
 
-def incidents_actionables(incidents_wikitext)
-  incidents_wikitext.transform_values do |wikitext|
-    actionables(wikitext)
-  end
-end
-
-def json(almost_json)
-  almost_json.sub(")]}'\n", '')
-end
-
 def csv(incidents_and_repos)
   incidents_and_repos_csv = ''
   incidents_and_repos.each do |incident, repos|
@@ -26,69 +16,24 @@ def gerrit_api_json(task)
   json(gerrit_api_query(task))
 end
 
-def patches(wikitext)
-  if wikitext.respond_to?(:scan)
-    wikitext.scan(/\[\[gerrit:(\d{6})\]\]/).flatten.uniq
-  else
-    []
-  end
+def incident_repos(incident)
+  incident.map(&:values).flatten
 end
 
 def incidents(subset)
   incidents_response(subset)['allpages'].map { |element| element['title'] }
 end
 
+def incidents_actionables(incidents_wikitext)
+  incidents_wikitext.transform_values do |wikitext|
+    actionables(wikitext)
+  end
+end
+
 def incidents_patches(incidents_actionables)
   incidents_actionables.transform_values do |actionables|
     patches(actionables)
   end
-end
-
-def incident_repos(incident)
-  incident.map(&:values).flatten
-end
-
-def incidents_repos_from_patches(incidents_patches)
-  incidents_patches.transform_values do |patches|
-    repositories(patches)
-  end
-end
-
-def incidents_tasks(incidents_actionables)
-  incidents_actionables.transform_values do |actionables|
-    tasks(actionables)
-  end
-end
-
-def incidents_wikitext(incidents)
-  incidents_wikitext = {}
-  incidents.each do |incident|
-    incidents_wikitext[incident] = incident_wikitext(incident)
-  end
-  incidents_wikitext
-end
-
-def parse_json(json)
-  require 'json'
-  JSON.parse(json)
-end
-
-def repositories(patches)
-  patches.map do |patch|
-    patch_repository(patch)
-  end.uniq
-end
-
-def tasks(wikitext)
-  if wikitext.respond_to?(:scan)
-    wikitext.scan(/\[\[phab:(T\d{5,6})\]\]/).flatten.uniq
-  else
-    []
-  end
-end
-
-def uniq_repos(repos_patches, repos_tasks)
-  (repos_patches + repos_tasks).uniq
 end
 
 def incidents_repos(
@@ -101,9 +46,21 @@ def incidents_repos(
   end
 end
 
+def incidents_repos_from_patches(incidents_patches)
+  incidents_patches.transform_values do |patches|
+    repositories(patches)
+  end
+end
+
 def incidents_repos_from_tasks(incidents_tasks_repos)
   incidents_tasks_repos.transform_values do |tasks_repos|
     incident_repos(tasks_repos)
+  end
+end
+
+def incidents_tasks(incidents_actionables)
+  incidents_actionables.transform_values do |actionables|
+    tasks(actionables)
   end
 end
 
@@ -111,6 +68,44 @@ def incidents_tasks_repos(incidents_tasks)
   incidents_tasks.transform_values do |tasks|
     repositories_connected_to_tasks(tasks)
   end
+end
+
+def incidents_wikitext(incidents)
+  incidents_wikitext = {}
+  incidents.each do |incident|
+    incidents_wikitext[incident] = incident_wikitext(incident)
+  end
+  incidents_wikitext
+end
+
+def json(almost_json)
+  almost_json.sub(")]}'\n", '')
+end
+
+def parse_json(json)
+  require 'json'
+  JSON.parse(json)
+end
+
+def patch_repository(patch)
+  require_relative 'api'
+  response = gerrit_api_patch(patch)
+  json = json(response)
+  parse_json(json)['project']
+end
+
+def patches(wikitext)
+  if wikitext.respond_to?(:scan)
+    wikitext.scan(/\[\[gerrit:(\d{6})\]\]/).flatten.uniq
+  else
+    []
+  end
+end
+
+def repositories(patches)
+  patches.map do |patch|
+    patch_repository(patch)
+  end.uniq
 end
 
 def repositories_connected_to_task(task)
@@ -127,9 +122,14 @@ def repositories_connected_to_tasks(tasks)
   end
 end
 
-require_relative 'api'
-def patch_repository(patch)
-  response = gerrit_api_patch(patch)
-  json = json(response)
-  parse_json(json)['project']
+def tasks(wikitext)
+  if wikitext.respond_to?(:scan)
+    wikitext.scan(/\[\[phab:(T\d{5,6})\]\]/).flatten.uniq
+  else
+    []
+  end
+end
+
+def uniq_repos(repos_patches, repos_tasks)
+  (repos_patches + repos_tasks).uniq
 end
