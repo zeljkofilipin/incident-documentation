@@ -39,12 +39,9 @@ def incidents(subset)
 end
 
 def incidents_patches(incidents_actionables)
-  incidents_patches = {}
-  incidents_actionables.each do |incident, actionables|
-    incidents_patches[incident] =
-      patches(actionables)
+  incidents_actionables.transform_values do |actionables|
+    patches(actionables)
   end
-  incidents_patches
 end
 
 def incident_repos(incident)
