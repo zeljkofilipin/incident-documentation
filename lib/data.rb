@@ -101,13 +101,10 @@ def incidents_repos_uniq(
   end
 end
 
-def repos_tasks_summary(incidents, incidents_phabricator_repositories)
-  incidents_phabricator_repository = {}
-  incidents.each do |incident|
-    incidents_phabricator_repository[incident] =
-      incident_repos(incidents_phabricator_repositories[incident])
+def incidents_repos_from_tasks(incidents_tasks_repos)
+  incidents_tasks_repos.transform_values do |tasks_repos|
+    incident_repos(tasks_repos)
   end
-  incidents_phabricator_repository
 end
 
 def incidents_tasks_repos(incidents_tasks)

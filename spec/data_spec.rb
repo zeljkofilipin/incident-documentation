@@ -647,7 +647,7 @@ RSpec.describe 'incident report' do
     end
     it 'finds repositories connected to an incident' do
       incidents_repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet', 'mediawiki/vagrant'] }
-      expect(repos_tasks_summary(incidents, incidents_tasks_repos)).to eq incidents_repos
+      expect(incidents_repos_from_tasks(incidents_tasks_repos)).to eq incidents_repos
     end
     it 'returns merged and deduplicated repositories for an incident' do
       repos_patches = ['operations/puppet']
