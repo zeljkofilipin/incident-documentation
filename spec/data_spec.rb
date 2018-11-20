@@ -653,7 +653,7 @@ RSpec.describe 'incident report' do
       repos_patches = ['operations/puppet']
       repos_tasks = ['operations/puppet', 'mediawiki/vagrant']
       repos = ['operations/puppet', 'mediawiki/vagrant']
-      expect(repo_patches_tasks(repos_patches, repos_tasks)).to eq repos
+      expect(uniq_repos(repos_patches, repos_tasks)).to eq repos
     end
   end
   context 'report' do

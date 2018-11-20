@@ -87,7 +87,7 @@ def tasks(wikitext)
   end
 end
 
-def repo_patches_tasks(repos_patches, repos_tasks)
+def uniq_repos(repos_patches, repos_tasks)
   (repos_patches + repos_tasks).uniq
 end
 
@@ -97,7 +97,7 @@ def repos_patches_tasks(
   incidents_data = {}
   incidents.each do |incident|
     incidents_data[incident] =
-      repo_patches_tasks(
+      uniq_repos(
         repos_from_patches[incident], repos_from_tasks[incident]
       )
   end
