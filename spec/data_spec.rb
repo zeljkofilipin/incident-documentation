@@ -59,7 +59,7 @@ RSpec.describe 'incident report' do
       expect(incidents_patches(incidents_actionables)).to eq incidents_patches
     end
     it 'finds phabricator tasks in actionables' do
-      expect(phabricator_from_wikitext(actionables)).to eq tasks
+      expect(tasks(actionables)).to eq tasks
     end
     it 'tasks from wikitext' do
       incidents_tasks = { incident => tasks }

@@ -56,7 +56,7 @@ end
 
 def incidents_tasks(incidents_actionables)
   incidents_actionables.transform_values do |actionables|
-    phabricator_from_wikitext(actionables)
+    tasks(actionables)
   end
 end
 
@@ -79,7 +79,7 @@ def repositories(patches)
   end.uniq
 end
 
-def phabricator_from_wikitext(wikitext)
+def tasks(wikitext)
   if wikitext.respond_to?(:scan)
     wikitext.scan(/\[\[phab:(T\d{5,6})\]\]/).flatten.uniq
   else
