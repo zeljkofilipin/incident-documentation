@@ -91,17 +91,14 @@ def uniq_repos(repos_patches, repos_tasks)
   (repos_patches + repos_tasks).uniq
 end
 
-def repos_patches_tasks(
-  incidents, repos_from_patches, repos_from_tasks
+def incidents_repos_uniq(
+  incidents_repos_patches, incidents_repos_tasks
 )
-  incidents_data = {}
-  incidents.each do |incident|
-    incidents_data[incident] =
-      uniq_repos(
-        repos_from_patches[incident], repos_from_tasks[incident]
-      )
+  incidents_repos_patches.merge(
+    incidents_repos_tasks
+  ) do |_, repos_patches, repos_tasks|
+    uniq_repos(repos_patches, repos_tasks)
   end
-  incidents_data
 end
 
 def repos_tasks_summary(incidents, incidents_phabricator_repositories)

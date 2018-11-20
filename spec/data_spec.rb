@@ -658,10 +658,10 @@ RSpec.describe 'incident report' do
   end
   context 'report' do
     it 'returns repositories connected to an incident' do
-      repos_from_patches = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet'] }
-      repos_from_tasks = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet', 'mediawiki/vagrant'] }
-      repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet', 'mediawiki/vagrant'] }
-      expect(repos_patches_tasks(incidents, repos_from_patches, repos_from_tasks)).to eq repos
+      incidents_repos_patches = { 'Incident documentation/20180312-Cache-text' => ['mediawiki/core', 'operations/puppet'] }
+      incidents_repos_tasks = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet', 'mediawiki/vagrant'] }
+      incidents_repos = { 'Incident documentation/20180312-Cache-text' => ['mediawiki/core', 'operations/puppet', 'mediawiki/vagrant'] }
+      expect(incidents_repos_uniq(incidents_repos_patches, incidents_repos_tasks)).to eq incidents_repos
     end
     it 'returns repositories connected to an incident as csv' do
       incidents_and_repos = { 'Incident documentation/20180312-Cache-text' => ['operations/puppet', 'mediawiki/vagrant'] }
