@@ -26,7 +26,7 @@ def gerrit_api_json(task)
   json(gerrit_api_query(task))
 end
 
-def gerrit_from_wikitext(wikitext)
+def patches(wikitext)
   if wikitext.respond_to?(:scan)
     wikitext.scan(/\[\[gerrit:(\d{6})\]\]/).flatten.uniq
   else
@@ -42,7 +42,7 @@ def incidents_patches(incidents_actionables)
   incidents_patches = {}
   incidents_actionables.each do |incident, actionables|
     incidents_patches[incident] =
-      gerrit_from_wikitext(actionables)
+      patches(actionables)
   end
   incidents_patches
 end
