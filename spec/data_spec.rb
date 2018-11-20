@@ -624,7 +624,7 @@ RSpec.describe 'incident report' do
     end
     it 'converts almost json to json' do
       almost_json = ")]}'\n#{json}"
-      expect(almost_json_to_json(almost_json)).to eq json
+      expect(json(almost_json)).to eq json
     end
   end
   context 'phabricator' do

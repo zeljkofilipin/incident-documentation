@@ -8,7 +8,7 @@ def incidents_actionables(incidents_wikitext)
   end
 end
 
-def almost_json_to_json(almost_json)
+def json(almost_json)
   almost_json.sub(")]}'\n", '')
 end
 
@@ -23,7 +23,7 @@ def csv(incidents_and_repos)
 end
 
 def gerrit_api_json(task)
-  almost_json_to_json(gerrit_api_query(task))
+  json(gerrit_api_query(task))
 end
 
 def gerrit_from_wikitext(wikitext)
@@ -145,6 +145,6 @@ end
 require_relative 'api'
 def patch_repository(patch)
   response = gerrit_api_patch(patch)
-  json = almost_json_to_json(response)
+  json = json(response)
   parse_json(json)['project']
 end
