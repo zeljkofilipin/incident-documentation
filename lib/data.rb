@@ -49,12 +49,9 @@ def incident_repos(incident)
 end
 
 def incidents_repos(incidents_patches)
-  incidents_repos = {}
-  incidents_patches.each do |incident, patches|
-    incidents_repos[incident] =
-      patches_repositories(patches)
+  incidents_patches.transform_values do |patches|
+    patches_repositories(patches)
   end
-  incidents_repos
 end
 
 def incidents_tasks(incidents_actionables)
