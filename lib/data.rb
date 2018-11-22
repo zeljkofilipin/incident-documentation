@@ -89,6 +89,14 @@ def repository_incidents(incidents_repos)
   repository_incidents
 end
 
+def markdown(repository_incidents)
+  markdown = "| Repository | Incidents |\n|--|--|\n"
+  repository_incidents.each do |repository, incidents|
+    markdown << "| #{repository} | #{incidents} |\n"
+  end
+  markdown
+end
+
 def parse_json(json)
   require 'json'
   JSON.parse(json)

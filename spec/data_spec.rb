@@ -683,13 +683,17 @@ RSpec.describe 'incident report' do
       'Incident documentation/20180808-Network' =>
         []
     }
+    repository_incidents = {
+      'mediawiki/extensions/Wikibase' => 1,
+      'operations/mediawiki-config' => 2,
+      'operations/puppet' => 3
+    }
     it 'returns repository/incidents' do
-      repository_incidents = {
-        'mediawiki/extensions/Wikibase' => 1,
-        'operations/mediawiki-config' => 2,
-        'operations/puppet' => 3
-      }
       expect(repository_incidents(incidents_repos)).to eq repository_incidents
+    end
+    it 'returns repository/incidents markdown table' do
+      markdown = "| Repository | Incidents |\n|--|--|\n| mediawiki/extensions/Wikibase | 1 |\n| operations/mediawiki-config | 2 |\n| operations/puppet | 3 |\n"
+      expect(markdown(repository_incidents)).to eq markdown
     end
   end
 end
