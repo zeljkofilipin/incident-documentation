@@ -43,3 +43,6 @@ pp incidents_repos = incidents_repos(
 
 puts "\nGerrit repositories connected to an incident CSV"
 puts csv(incidents_repos)
+
+puts "\nGerrit repositories and how many incidents they are connected to"
+puts repository_incidents(incidents_repos)
