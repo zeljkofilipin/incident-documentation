@@ -670,6 +670,27 @@ RSpec.describe 'incident report' do
         "Incident documentation/20180312-Cache-text,mediawiki/vagrant\n"
       expect(csv(incidents_and_repos)).to eq incidents_and_repos_csv
     end
+    incidents_repos = {
+      'Incident documentation/20180717-Train' =>
+       ['operations/mediawiki-config',
+        'operations/puppet'],
+      'Incident documentation/20180724-Train' =>
+        ['mediawiki/extensions/Wikibase',
+         'operations/mediawiki-config',
+         'operations/puppet'],
+      'Incident documentation/20180731-Phabricator' =>
+        ['operations/puppet'],
+      'Incident documentation/20180808-Network' =>
+        []
+    }
+    it 'returns repository/incidents' do
+      repository_incidents = {
+        'mediawiki/extensions/Wikibase' => 1,
+        'operations/mediawiki-config' => 2,
+        'operations/puppet' => 3
+      }
+      expect(repository_incidents(incidents_repos)).to eq repository_incidents
+    end
   end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/LineLength

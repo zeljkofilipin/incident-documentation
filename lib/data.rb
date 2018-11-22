@@ -82,6 +82,13 @@ def json(almost_json)
   almost_json.sub(")]}'\n", '')
 end
 
+def repository_incidents(incidents_repos)
+  repos = incidents_repos.values.flatten
+  repository_incidents = Hash.new(0)
+  repos.each { |repo| repository_incidents[repo] += 1 }
+  repository_incidents
+end
+
 def parse_json(json)
   require 'json'
   JSON.parse(json)
