@@ -86,7 +86,7 @@ def repository_incidents(incidents_repos)
   repos = incidents_repos.values.flatten
   repository_incidents = Hash.new(0)
   repos.each { |repo| repository_incidents[repo] += 1 }
-  repository_incidents
+  repository_incidents.sort_by { |_, incidents| incidents }.reverse.to_h
 end
 
 def markdown(repository_incidents)
